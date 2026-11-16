@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Risorse Didattiche – Demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbf8f2; --panel:#ffffff; --ink:#22303c; --muted:#6b7680;
+    --line:#ece5d8; --side:#1f3a4d; --side-ink:#e7eef3; --side-muted:#9fb3c2;
+    --accent:#f2a33a; --accent-soft:#fdf0dc; --hover:rgba(255,255,255,.07);
+    --c-inf:#f28b6b; --c-pri:#f2c14e; --c-sec1:#5fb49c; --c-sec2:#6c9bd2; --c-gen:#b08bd6;
+    --ok:#2f8a6f; --err:#c4472f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{font-family:"Nunito",system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
+  button{font:inherit}
+
+  /* ---------- Sidebar ---------- */
+  aside{width:300px;flex-shrink:0;background:var(--side);color:var(--side-ink);height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
+  .brand{display:flex;align-items:center;gap:12px;padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit}
+  .logo{width:40px;height:40px;border-radius:12px;background:var(--accent);display:grid;place-items:center;flex-shrink:0}
+  .brand h1{font-family:"Fraunces",serif;font-size:19px;margin:0;line-height:1.15}
+  .brand small{display:block;font-size:12px;color:var(--side-muted);font-weight:600;letter-spacing:.02em}
+  nav{overflow-y:auto;padding:12px 10px 24px;flex:1}
+  nav::-webkit-scrollbar{width:6px} nav::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:3px}
+
+  .grp{margin-bottom:4px}
+  .toggle{width:100%;display:flex;align-items:center;gap:10px;background:none;border:0;color:inherit;font:inherit;font-weight:800;font-size:14.5px;text-align:left;padding:10px 12px;border-radius:10px;cursor:pointer}
+  .toggle:hover{background:var(--hover)}
+  .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .toggle .lbl{flex:1}
+  .chev{transition:transform .2s;opacity:.6;flex-shrink:0}
+  .grp.open > .toggle .chev{transform:rotate(90deg)}
+  .sub{display:none;padding:2px 0 6px 20px;margin-left:16px;border-left:1px solid rgba(255,255,255,.1)}
+  .grp.open > .sub{display:block}
+  .sub .toggle{font-weight:700;font-size:13.5px;padding:7px 10px;color:var(--side-ink)}
+
+  .link{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:8px;color:var(--side-muted);text-decoration:none;font-size:14px;font-weight:600}
+  .link:hover{background:var(--hover);color:var(--side-ink)}
+  .link.active{background:var(--accent);color:#2a1d07}
+  .soon{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;background:rgba(255,255,255,.1);color:var(--side-muted);padding:2px 7px;border-radius:20px;white-space:nowrap}
+  .link.active .soon{background:rgba(0,0,0,.12);color:#2a1d07}
+  .nav-sep{height:1px;background:rgba(255,255,255,.1);margin:12px 12px}
+  .price-link .lbl{flex:1}
+
+  .side-foot{padding:14px 14px 18px;border-top:1px solid rgba(255,255,255,.08)}
+  .side-cta{display:block;background:rgba(255,255,255,.06);border-radius:14px;padding:14px;font-size:13.5px;color:var(--side-muted);line-height:1.45}
+  .side-cta strong{display:block;color:var(--side-ink);font-size:14.5px;margin-bottom:4px}
+  .side-cta button{margin-top:10px;width:100%}
+  .side-user{display:flex;align-items:center;gap:10px}
+  .side-user .meta{flex:1;min-width:0}
+  .side-user .meta strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .side-user .meta a{font-size:12.5px;color:var(--side-muted);text-decoration:none;font-weight:700}
+  .side-user .meta a:hover{color:var(--side-ink)}
+
+  /* ---------- Main / Appbar ---------- */
+  main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .appbar{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:14px 56px;position:sticky;top:0;z-index:5;background:rgba(251,248,242,.88);backdrop-filter:blur(8px);border-bottom:1px solid transparent;transition:border-color .2s}
+  .appbar.scrolled{border-bottom-color:var(--line)}
+  .topbar{display:none;align-items:center;gap:12px;padding:10px 12px 10px 16px;background:var(--side);color:var(--side-ink);position:sticky;top:0;z-index:5}
+  .topbar > button{background:none;border:0;color:inherit;padding:6px;cursor:pointer}
+  .topbar strong{font-family:"Fraunces",serif;font-size:17px;flex:1}
+  .auth-slot{display:flex;align-items:center;gap:8px}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:800;font-size:15px;cursor:pointer;text-decoration:none;transition:filter .15s, transform .15s, background .15s;white-space:nowrap}
+  .btn:active{transform:translateY(1px)}
+  .btn-primary{background:var(--accent);color:#2a1d07}
+  .btn-primary:hover{filter:brightness(1.06)}
+  .btn-dark{background:var(--side);color:#fff}
+  .btn-dark:hover{filter:brightness(1.15)}
+  .btn-ghost{background:transparent;color:var(--ink)}
+  .btn-ghost:hover{background:rgba(34,48,60,.06)}
+  .btn-outline{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+  .btn-outline:hover{box-shadow:inset 0 0 0 1.5px #d6cbb6;background:#fff}
+  .btn-sm{padding:8px 14px;font-size:14px;border-radius:10px}
+  .btn-lg{padding:15px 24px;font-size:16.5px;border-radius:14px}
+  .topbar .btn-ghost{color:var(--side-ink)}
+  .topbar .btn-ghost:hover{background:var(--hover)}
+
+  .avatar{width:36px;height:36px;border-radius:50%;background:var(--accent);color:#2a1d07;display:grid;place-items:center;font-weight:800;font-size:14px;flex-shrink:0}
+  .user-btn{display:flex;align-items:center;gap:10px;background:none;border:0;padding:4px 10px 4px 4px;border-radius:30px;cursor:pointer;color:inherit;font-weight:800;font-size:14.5px}
+  .user-btn:hover{background:rgba(34,48,60,.06)}
+  .topbar .user-btn:hover{background:var(--hover)}
+  .menu-wrap{position:relative}
+  .dropdown{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 14px 40px rgba(34,48,60,.14);min-width:230px;padding:8px;display:none;color:var(--ink);z-index:40}
+  .dropdown.show{display:block}
+  .dropdown .who{padding:10px 12px 12px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .dropdown .who strong{display:block}
+  .dropdown .who span{font-size:13px;color:var(--muted)}
+  .dropdown a,.dropdown button{display:flex;width:100%;align-items:center;gap:10px;padding:9px 12px;border-radius:9px;border:0;background:none;text-align:left;color:inherit;text-decoration:none;font-weight:700;font-size:14.5px;cursor:pointer}
+  .dropdown a:hover,.dropdown button:hover{background:var(--bg)}
+  .dropdown .danger{color:var(--err)}
+
+  .content{padding:28px 56px 56px;max-width:1000px;width:100%}
+  .content.wide{max-width:1160px}
+  .crumbs{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:10px}
+  .crumbs span+span::before{content:"›";margin:0 8px;opacity:.6}
+  h2{font-family:"Fraunces",serif;font-size:40px;margin:0 0 10px;line-height:1.1}
+  .lead{font-size:17px;color:var(--muted);max-width:620px;line-height:1.55;margin:0 0 36px}
+
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:10px;transition:transform .15s, box-shadow .15s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,48,60,.08)}
+  .card .bar{width:36px;height:6px;border-radius:3px}
+  .card h3{margin:0;font-size:17px;font-weight:800}
+  .card p{margin:0;font-size:14px;color:var(--muted);line-height:1.45}
+
+  .placeholder{border:2px dashed var(--line);border-radius:18px;padding:48px 32px;text-align:center;background:var(--panel)}
+  .placeholder .ico{width:64px;height:64px;border-radius:18px;background:var(--accent-soft);display:grid;place-items:center;margin:0 auto 16px}
+  .placeholder h3{margin:0 0 6px;font-size:19px}
+  .placeholder p{margin:0;color:var(--muted)}
+  .placeholder .btn{margin-top:18px}
+  .pill{display:inline-block;background:var(--accent-soft);color:#9a5d0b;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.06em;padding:5px 12px;border-radius:20px;margin-bottom:14px}
+
+  /* ---------- Home marketing ---------- */
+  .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;padding:24px 0 56px}
+  .hero h2{font-size:54px;letter-spacing:-.01em;margin-bottom:18px}
+  .hero h2 em{font-style:normal;background:linear-gradient(transparent 62%, var(--accent-soft) 62%);padding:0 4px}
+  .hero .lead{font-size:18.5px;margin-bottom:28px}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px}
+  .reassure{display:flex;gap:18px;flex-wrap:wrap;font-size:14px;color:var(--muted);font-weight:700}
+  .reassure span{display:flex;align-items:center;gap:6px}
+
+  .mock{position:relative;height:400px}
+  .mock-panel{position:absolute;background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:0 20px 50px rgba(34,48,60,.10)}
+  .mock-main{inset:20px 0 30px 30px;padding:22px}
+  .mock-main .mh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+  .mock-main .mh strong{font-family:"Fraunces",serif;font-size:19px}
+  .mock-main .mh span{font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .mrow{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;border:1px solid var(--line);margin-bottom:10px}
+  .mrow .sw{width:38px;height:38px;border-radius:10px;flex-shrink:0;display:grid;place-items:center}
+  .mrow .tx{flex:1}
+  .mrow .tx b{display:block;font-size:14.5px}
+  .mrow .tx i{font-style:normal;font-size:12.5px;color:var(--muted);font-weight:600}
+  .mrow .tag{font-size:11px;font-weight:800;padding:3px 8px;border-radius:12px;background:var(--bg);color:var(--muted)}
+  .mock-chip{left:0;bottom:0;padding:14px 16px;display:flex;align-items:center;gap:12px;font-size:14px}
+  .mock-chip .ring{width:42px;height:42px;border-radius:50%;background:conic-gradient(var(--c-sec1) 0 76%, #e8efe9 76% 100%);display:grid;place-items:center}
+  .mock-chip .ring::after{content:"";width:30px;height:30px;border-radius:50%;background:#fff}
+  .mock-chip b{display:block}
+  .mock-chip span{color:var(--muted);font-weight:600;font-size:12.5px}
+  .mock-badge{right:-6px;top:0;padding:10px 14px;font-weight:800;font-size:13px;display:flex;align-items:center;gap:8px;background:var(--side);color:#fff;border:0}
+
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#fff;border:1px solid var(--line);border-radius:20px;margin-bottom:72px}
+  .stat{padding:24px 22px;border-left:1px solid var(--line)}
+  .stat:first-child{border-left:0}
+  .stat b{display:block;font-family:"Fraunces",serif;font-size:36px;line-height:1;margin-bottom:6px}
+  .stat span{color:var(--muted);font-weight:700;font-size:14px}
+
+  .sec{margin-bottom:76px}
+  .sec-head{max-width:640px;margin-bottom:28px}
+  .eyebrow{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#b16c10;margin-bottom:8px;display:block}
+  .sec-head h3{font-family:"Fraunces",serif;font-size:34px;margin:0 0 10px;line-height:1.15}
+  .sec-head p{margin:0;color:var(--muted);font-size:16.5px;line-height:1.55}
+
+  .feats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  .feat{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;gap:16px}
+  .feat .fi{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex-shrink:0}
+  .feat h4{margin:0 0 6px;font-size:17.5px}
+  .feat p{margin:0;color:var(--muted);line-height:1.5;font-size:15px}
+
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:s}
+  .step{position:relative;padding:26px 24px 24px;border-radius:18px;background:var(--accent-soft)}
+  .step::before{counter-increment:s;content:counter(s);font-family:"Fraunces",serif;font-size:15px;width:34px;height:34px;border-radius:50%;background:#fff;display:grid;place-items:center;margin-bottom:14px;color:#9a5d0b}
+  .step h4{margin:0 0 6px;font-size:17.5px}
+  .step p{margin:0;color:#6e5a3c;line-height:1.5;font-size:15px}
+
+  .auds{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+  .audc{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;transition:transform .15s, box-shadow .15s;position:relative;overflow:hidden}
+  .audc::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--tc)}
+  .audc:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,48,60,.08)}
+  .audc h4{margin:6px 0 0;font-size:17px}
+  .audc p{margin:0;color:var(--muted);font-size:14.5px;line-height:1.45;flex:1}
+  .audc .from{font-weight:800;font-size:14px;margin-top:6px}
+  .audc .from b{font-family:"Fraunces",serif;font-size:22px}
+
+  .faq{display:flex;flex-direction:column;gap:10px;max-width:780px}
+  .faq details{background:#fff;border:1px solid var(--line);border-radius:14px;padding:4px 20px}
+  .faq summary{cursor:pointer;font-weight:800;padding:14px 0;list-style:none;display:flex;justify-content:space-between;gap:12px;font-size:16px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-size:22px;line-height:1;color:var(--muted);transition:transform .2s}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{margin:0 0 16px;color:var(--muted);line-height:1.55}
+
+  .band{background:var(--side);color:#fff;border-radius:24px;padding:44px 44px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;position:relative;overflow:hidden}
+  .band::after{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(242,163,58,.18)}
+  .band h3{font-family:"Fraunces",serif;font-size:32px;margin:0 0 8px;line-height:1.15}
+  .band p{margin:0;color:var(--side-muted);font-size:16px}
+  .band .btns{display:flex;gap:10px;position:relative;z-index:1;flex-wrap:wrap}
+  .band .btn-outline{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3)}
+  .band .btn-outline:hover{background:rgba(255,255,255,.06)}
+
+  .welcome{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px 24px;margin:8px 0 36px;flex-wrap:wrap}
+  .welcome .avatar{width:52px;height:52px;font-size:19px}
+  .welcome .tx{flex:1;min-width:220px}
+  .welcome h3{margin:0 0 4px;font-family:"Fraunces",serif;font-size:23px}
+  .welcome p{margin:0;color:var(--muted)}
+
+  /* ---------- Prezzi ---------- */
+  .note{display:flex;gap:14px;align-items:flex-start;background:#eaf5f1;border:1px solid #cfe7df;border-radius:14px;padding:16px 18px;margin:0 0 40px;max-width:760px}
+  .note svg{flex-shrink:0;margin-top:2px}
+  .note p{margin:0;line-height:1.5;font-size:15px}
+  .aud{margin-bottom:40px}
+  .aud-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+  .aud-head h3{font-family:"Fraunces",serif;font-size:24px;margin:0}
+  .aud-head p{margin:0;color:var(--muted);font-size:14.5px}
+  .tiers{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+  .tier{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+  .tier::before{content:"";position:absolute;left:0;top:0;right:0;height:5px;background:var(--tc)}
+  .tier .name{font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px}
+  .price{display:flex;align-items:baseline;gap:6px;margin-bottom:4px}
+  .price .from{font-size:14px;color:var(--muted);font-weight:700}
+  .price .amt{font-family:"Fraunces",serif;font-size:44px;line-height:1}
+  .price .per{color:var(--muted);font-weight:700}
+  .tier .qty{font-weight:800;font-size:16px;margin:8px 0 16px}
+  .tier ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:9px;flex:1}
+  .tier li{display:flex;gap:9px;font-size:14.5px;line-height:1.4}
+  .tier li svg{flex-shrink:0;margin-top:2px}
+  .cta{border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:800;font-size:15px;cursor:pointer;background:var(--side);color:#fff}
+  .cta:hover{filter:brightness(1.15)}
+  .cta.alt{background:var(--accent-soft);color:#7a4a08}
+
+  /* ---------- Account ---------- */
+  .acc-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .box{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px}
+  .box h3{margin:0 0 16px;font-size:18px}
+  .kv{display:grid;grid-template-columns:130px 1fr;gap:10px 14px;font-size:15px}
+  .kv dt{color:var(--muted);font-weight:700}
+  .kv dd{margin:0;font-weight:700;word-break:break-word}
+  .status{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:20px;background:#fff4e2;color:#9a5d0b}
+  .box .btn{margin-top:18px}
+
+  /* ---------- Modal auth ---------- */
+  .overlay{position:fixed;inset:0;background:rgba(20,32,42,.5);backdrop-filter:blur(3px);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+  .overlay.show{display:flex;animation:fade .2s}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  @keyframes pop{from{opacity:0;transform:translateY(12px) scale(.98)}to{opacity:1;transform:none}}
+  .modal{background:#fff;border-radius:22px;width:100%;max-width:860px;display:grid;grid-template-columns:.9fr 1.1fr;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);animation:pop .25s;max-height:calc(100vh - 40px)}
+  .m-side{background:var(--side);color:#fff;padding:36px 30px;display:flex;flex-direction:column;gap:18px;position:relative;overflow:hidden}
+  .m-side::after{content:"";position:absolute;left:-80px;bottom:-80px;width:240px;height:240px;border-radius:50%;background:rgba(242,163,58,.2)}
+  .m-side h3{font-family:"Fraunces",serif;font-size:27px;margin:0;line-height:1.2}
+  .m-side ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;position:relative;z-index:1}
+  .m-side li{display:flex;gap:10px;color:var(--side-ink);font-size:15px;line-height:1.4}
+  .m-side li svg{flex-shrink:0;margin-top:2px}
+  .m-side .foot{margin-top:auto;font-size:13px;color:var(--side-muted);position:relative;z-index:1}
+  .m-body{padding:30px 34px 30px;overflow-y:auto;position:relative}
+  .m-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:0;background:var(--bg);cursor:pointer;display:grid;place-items:center;color:var(--ink)}
+  .m-close:hover{background:var(--line)}
+  .tabs{display:flex;background:var(--bg);border-radius:12px;padding:4px;margin:0 44px 22px 0}
+  .tabs button{flex:1;border:0;background:none;padding:9px;border-radius:9px;font-weight:800;font-size:14.5px;cursor:pointer;color:var(--muted)}
+  .tabs button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(34,48,60,.1)}
+  .m-body h4{font-family:"Fraunces",serif;font-size:24px;margin:0 0 4px}
+  .m-body .sub-t{color:var(--muted);margin:0 0 20px;font-size:15px}
+  .ctx-msg{background:var(--accent-soft);color:#7a4a08;border-radius:12px;padding:10px 14px;font-weight:700;font-size:14px;margin-bottom:16px;display:none}
+  .ctx-msg.show{display:block}
+  form{display:flex;flex-direction:column;gap:14px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .field label{display:block;font-weight:800;font-size:13.5px;margin-bottom:6px}
+  .field input,.field select{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:15px;color:var(--ink);background:#fff;outline:none;transition:border-color .15s, box-shadow .15s}
+  .field input:focus,.field select:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(242,163,58,.15)}
+  .field.bad input,.field.bad select{border-color:var(--err)}
+  .field .err{color:var(--err);font-size:13px;font-weight:700;margin-top:5px;display:none}
+  .field.bad .err{display:block}
+  .pw{position:relative}
+  .pw input{padding-right:46px}
+  .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:none;padding:8px;cursor:pointer;color:var(--muted)}
+  .meter{display:flex;gap:4px;margin-top:8px}
+  .meter i{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .2s}
+  .meter-l{font-size:12.5px;color:var(--muted);font-weight:700;margin-top:5px;min-height:16px}
+  .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .roles label{margin:0;position:relative}
+  .roles input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
+  .m-body{overflow-x:hidden}
+  .roles span{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 6px;border:1.5px solid var(--line);border-radius:12px;font-weight:800;font-size:13px;cursor:pointer;text-align:center;transition:all .15s}
+  .roles span:hover{border-color:#d6cbb6}
+  .roles input:checked + span{border-color:var(--accent);background:var(--accent-soft);color:#7a4a08}
+  .roles input:focus-visible + span{box-shadow:0 0 0 4px rgba(242,163,58,.25)}
+  .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.4;color:var(--muted);font-weight:600;cursor:pointer}
+  .check input{margin-top:2px;width:17px;height:17px;accent-color:var(--side);flex-shrink:0}
+  .check a{color:var(--ink)}
+  .between{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .linkbtn{background:none;border:0;padding:0;color:#9a5d0b;font-weight:800;cursor:pointer;font-size:14px}
+  .linkbtn:hover{text-decoration:underline}
+  .form-err{background:#fbe9e5;color:var(--err);border-radius:12px;padding:10px 14px;font-weight:700;font-size:14px;display:none}
+  .form-err.show{display:block}
+  .submit{width:100%;padding:14px;font-size:16px}
+  .submit[disabled]{opacity:.75;cursor:wait}
+  .spin{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(42,29,7,.25);border-top-color:#2a1d07;animation:sp .7s linear infinite}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;font-weight:700}
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+  .demo-hint{font-size:13px;color:var(--muted);text-align:center;margin:0}
+  .demo-hint code{background:var(--bg);padding:2px 6px;border-radius:6px;font-size:12.5px}
+  .switch{text-align:center;font-size:14.5px;color:var(--muted);margin:0}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:70;max-width:calc(100% - 32px);text-align:center}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  .scrim{display:none}
+  @media (max-width:1100px){
+    .hero{grid-template-columns:1fr}
+    .mock{max-width:520px;height:380px}
+    .auds{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:860px){
+    body{display:block}
+    aside{position:fixed;left:0;top:0;z-index:20;transform:translateX(-100%);transition:transform .25s;box-shadow:4px 0 24px rgba(0,0,0,.2)}
+    body.menu-open aside{transform:none}
+    body.menu-open .scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:15}
+    .topbar{display:flex}
+    .appbar{display:none}
+    .content{padding:24px 20px 48px}
+    h2{font-size:30px}
+    .hero h2{font-size:38px}
+    .stats{grid-template-columns:repeat(2,1fr)}
+    .stat:nth-child(3){border-left:0}
+    .stat:nth-child(n+3){border-top:1px solid var(--line)}
+    .feats,.steps,.acc-grid{grid-template-columns:1fr}
+    .band{padding:32px 26px}
+    .modal{grid-template-columns:1fr}
+    .m-side{display:none}
+    .m-body{padding:24px 22px}
+    .topbar .auth-slot .btn-ghost{display:none}
+  }
+  @media (max-width:520px){
+    .auds{grid-template-columns:1fr}
+    .roles{grid-template-columns:repeat(2,1fr)}
+    .row2{grid-template-columns:1fr}
+    .mock{height:340px}
+    .mock-main{left:10px}
+  }
+</style>
+</head>
+<body>
+
+<aside id="sidebar">
+  <a class="brand" href="#home">
+    <div class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a1d07" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/></svg>
+    </div>
+    <div><h1>Risorse Didattiche</h1><small>Materiali per la scuola</small></div>
+  </a>
+  <nav id="nav"></nav>
+  <div class="side-foot" id="sideFoot"></div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<main>
+  <div class="topbar">
+    <button id="menuBtn" aria-label="Apri menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+    <strong>Risorse Didattiche</strong>
+    <div class="auth-slot"></div>
+  </div>
+  <div class="appbar" id="appbar"><div class="auth-slot"></div></div>
+  <div class="content" id="content"></div>
+</main>
+
+<!-- ---------- Modal autenticazione ---------- -->
+<div class="overlay" id="authOverlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="m-side">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a1d07" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M8 7h7"/></svg>
+      </div>
+      <h3>Meno tempo a preparare, più tempo per insegnare.</h3>
+      <ul id="sidePerks"></ul>
+      <div class="foot">Sito demo · nessun dato lascia il tuo browser.</div>
+    </div>
+    <div class="m-body">
+      <button class="m-close" id="authClose" aria-label="Chiudi">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div class="tabs" role="tablist">
+        <button type="button" data-tab="login" role="tab">Accedi</button>
+        <button type="button" data-tab="signup" role="tab">Registrati</button>
+      </div>
+      <div class="ctx-msg" id="ctxMsg"></div>
+
+      <!-- LOGIN -->
+      <div id="paneLogin">
+        <h4 id="authTitle">Bentornato!</h4>
+        <p class="sub-t">Accedi per ritrovare le tue classi e i tuoi materiali.</p>
+        <form id="loginForm" novalidate>
+          <div class="form-err" id="loginErr"></div>
+          <div class="field">
+            <label for="lEmail">Email</label>
+            <input id="lEmail" type="email" autocomplete="email" placeholder="nome@scuola.it">
+            <div class="err">Inserisci un indirizzo email valido.</div>
+          </div>
+          <div class="field">
+            <div class="between"><label for="lPass">Password</label><button type="button" class="linkbtn" id="forgot">Password dimenticata?</button></div>
+            <div class="pw"><input id="lPass" type="password" autocomplete="current-password" placeholder="La tua password"><button type="button" class="eye" aria-label="Mostra password"></button></div>
+            <div class="err">Inserisci la password.</div>
+          </div>
+          <label class="check"><input type="checkbox" id="lRemember" checked> Ricordami su questo dispositivo</label>
+          <button class="btn btn-primary submit" type="submit">Accedi</button>
+          <div class="divider">oppure</div>
+          <button class="btn btn-outline submit" type="button" id="demoLogin">Entra con l'account demo</button>
+          <p class="demo-hint">Credenziali demo: <code>demo@risorsedidattiche.it</code> · <code>demo1234</code></p>
+          <p class="switch">Non hai un account? <button type="button" class="linkbtn" data-tab="signup">Registrati gratis</button></p>
+        </form>
+      </div>
+
+      <!-- SIGNUP -->
+      <div id="paneSignup" hidden>
+        <h4>Crea il tuo account</h4>
+        <p class="sub-t">Bastano 30 secondi. Nessuna carta di credito richiesta.</p>
+        <form id="signupForm" novalidate>
+          <div class="form-err" id="signupErr"></div>
+          <div class="field">
+            <label>Chi sei?</label>
+            <div class="roles" id="roles"></div>
+            <div class="err">Seleziona il tuo profilo.</div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="sNome">Nome</label>
+              <input id="sNome" autocomplete="given-name" placeholder="Giulia">
+              <div class="err">Inserisci il nome.</div>
+            </div>
+            <div class="field">
+              <label for="sCognome">Cognome</label>
+              <input id="sCognome" autocomplete="family-name" placeholder="Rossi">
+              <div class="err">Inserisci il cognome.</div>
+            </div>
+          </div>
+          <div class="field">
+            <label for="sEmail">Email</label>
+            <input id="sEmail" type="email" autocomplete="email" placeholder="nome@scuola.it">
+            <div class="err">Inserisci un indirizzo email valido.</div>
+          </div>
+          <div class="field">
+            <label for="sOrdine">Ordine di scuola principale</label>
+            <select id="sOrdine"></select>
+            <div class="err">Seleziona un ordine di scuola.</div>
+          </div>
+          <div class="field">
+            <label for="sPass">Password</label>
+            <div class="pw"><input id="sPass" type="password" autocomplete="new-password" placeholder="Almeno 8 caratteri"><button type="button" class="eye" aria-label="Mostra password"></button></div>
+            <div class="meter" id="meter"><i></i><i></i><i></i><i></i></div>
+            <div class="meter-l" id="meterL"></div>
+            <div class="err">La password deve avere almeno 8 caratteri.</div>
+          </div>
+          <div class="field">
+            <label class="check"><input type="checkbox" id="sTerms"> <span>Accetto i <a href="#" onclick="return false">Termini di servizio</a> e l'<a href="#" onclick="return false">Informativa privacy</a></span></label>
+            <div class="err">Devi accettare i termini per continuare.</div>
+          </div>
+          <label class="check"><input type="checkbox" id="sNews"> Voglio ricevere novità sui nuovi materiali (max 1 email al mese)</label>
+          <button class="btn btn-primary submit" type="submit">Crea account gratuito</button>
+          <p class="switch">Hai già un account? <button type="button" class="linkbtn" data-tab="login">Accedi</button></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const SOON = true;
+const MENU = [
+  { id:"infanzia", label:"Scuola dell'infanzia", color:"var(--c-inf)", children:[
+    {label:"Creatività"}, {label:"Giochi didattici"}
+  ]},
+  { id:"primaria", label:"Scuola primaria", color:"var(--c-pri)", children:[
+    {label:"Italiano"}, {label:"Matematica"}, {label:"Altre materie"}, {label:"Giochi didattici"}
+  ]},
+  { id:"sec1", label:"Scuola secondaria di primo grado", color:"var(--c-sec1)", children:[
+    {label:"Italiano"}, {label:"Matematica"}, {label:"Storia"}, {label:"Geografia"},
+    {label:"Scienze"}, {label:"Inglese"}, {label:"Seconda lingua comunitaria"},
+    {label:"Tecnologia"}, {label:"Arte e immagine"}, {label:"Musica"},
+    {label:"Educazione fisica"}, {label:"Educazione civica"}, {label:"Religione"},
+    {label:"Giochi didattici"}
+  ]},
+  { id:"sec2", label:"Scuola secondaria di secondo grado", color:"var(--c-sec2)", children:[
+    { id:"generali", label:"Generali", children:[
+      {label:"Italiano"}, {label:"Matematica"}, {label:"Storia"}, {label:"Inglese"},
+      {label:"Geografia"}, {label:"Scienze naturali"}, {label:"Fisica"}, {label:"Informatica"},
+      {label:"Diritto ed economia"}, {label:"Scienze motorie"}, {label:"Educazione civica"},
+      {label:"Religione"}
+    ]},
+    { label:"Licei", soon:SOON },
+    { label:"Altri Istituti", soon:SOON }
+  ]},
+  { id:"generali-risorse", label:"Risorse Generali", color:"var(--c-gen)", soon:SOON }
+];
+
+const esc = s => String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+// ---- build slugs & index ----
+const slugify = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
+  .replace(/['’]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"");
+const PAGES = {};
+function index(items, trail, color){
+  items.forEach(it=>{
+    it.slug = (trail.length ? trail[trail.length-1].slug+"-" : "") + slugify(it.id || it.label);
+    it.color = it.color || color;
+    it.trail = [...trail, it];
+    PAGES[it.slug] = it;
+    if(it.children) index(it.children, it.trail, it.color);
+  });
+}
+index(MENU, [], null);
+const LEAVES = Object.values(PAGES).filter(p=>!p.children && !p.soon).length;
+
+// ======================================================================
+//  AUTENTICAZIONE SIMULATA (tutto resta nel browser)
+// ======================================================================
+const mem = {};
+const store = {
+  get(k, d, area="local"){ try{ const v = window[area+"Storage"].getItem(k); return v!=null ? JSON.parse(v) : (mem[area+k] ?? d); }catch(e){ return mem[area+k] ?? d; } },
+  set(k, v, area="local"){ mem[area+k]=v; try{ window[area+"Storage"].setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k, area="local"){ delete mem[area+k]; try{ window[area+"Storage"].removeItem(k); }catch(e){} }
+};
+// hash non crittografico: in un sito vero la password la gestisce il server
+const fakeHash = s => { let h=5381; for(const c of s) h=((h<<5)+h+c.charCodeAt(0))|0; return "h"+(h>>>0).toString(36); };
+const wait = ms => new Promise(r=>setTimeout(r, ms));
+
+const ROLES = [
+  {v:"studente", l:"Studente", ico:'<path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/>'},
+  {v:"docente", l:"Docente", ico:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'},
+  {v:"istituto", l:"Istituto", ico:'<path d="M3 21h18M5 21V10l7-5 7 5v11"/><path d="M10 21v-5h4v5"/>'},
+  {v:"ente", l:"Doposcuola", ico:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 1.5 6 4.5"/>'}
+];
+const ROLE_LABEL = Object.fromEntries(ROLES.map(r=>[r.v,r.l]));
+
+function users(){ return store.get("rd_users", []); }
+function saveUsers(u){ store.set("rd_users", u); }
+(function seed(){
+  const u = users();
+  if(!u.some(x=>x.email==="demo@risorsedidattiche.it")){
+    u.push({ nome:"Giulia", cognome:"Demo", email:"demo@risorsedidattiche.it", pass:fakeHash("demo1234"),
+      ruolo:"docente", ordine:"sec1", news:false, creato:new Date().toISOString() });
+    saveUsers(u);
+  }
+})();
+function currentUser(){
+  const s = store.get("rd_session", null, "session") || store.get("rd_session", null);
+  if(!s) return null;
+  return users().find(u=>u.email===s.email) || null;
+}
+function startSession(email, remember){
+  store.del("rd_session"); store.del("rd_session","session");
+  store.set("rd_session", {email, at:Date.now()}, remember ? "local" : "session");
+}
+function logout(){
+  store.del("rd_session"); store.del("rd_session","session");
+  refreshAuthUI();
+  showToast("Sei uscito dal tuo account");
+  if(location.hash==="#account") location.hash="#home"; else render();
+}
+const initials = u => (u.nome[0]+(u.cognome?.[0]||"")).toUpperCase();
+
+// ---- UI autenticazione (barra in alto + sidebar) ----
+function refreshAuthUI(){
+  const u = currentUser();
+  document.querySelectorAll(".auth-slot").forEach(slot=>{
+    slot.innerHTML = u ? `
+      <div class="menu-wrap">
+        <button class="user-btn" data-usermenu aria-haspopup="true"><span class="avatar">${esc(initials(u))}</span><span class="nm">${esc(u.nome)}</span></button>
+        <div class="dropdown">
+          <div class="who"><strong>${esc(u.nome)} ${esc(u.cognome)}</strong><span>${esc(u.email)}</span></div>
+          <a href="#account">Il mio account</a>
+          <a href="#prezzi">Scegli un piano</a>
+          <button class="danger" data-logout>Esci</button>
+        </div>
+      </div>` : `
+      <button class="btn btn-ghost btn-sm" data-auth="login">Accedi</button>
+      <button class="btn btn-primary btn-sm" data-auth="signup">Registrati</button>`;
+  });
+  document.querySelectorAll(".topbar .nm").forEach(n=>n.remove());
+  document.getElementById("sideFoot").innerHTML = u ? `
+    <div class="side-user"><span class="avatar">${esc(initials(u))}</span>
+      <div class="meta"><strong>${esc(u.nome)} ${esc(u.cognome)}</strong><a href="#account">Il mio account →</a></div></div>` : `
+    <div class="side-cta"><strong>Nuovo qui?</strong>Crea un account gratuito e salva i materiali per le tue classi.
+      <button class="btn btn-primary btn-sm" data-auth="signup">Registrati gratis</button></div>`;
+}
+
+// ---- Modal ----
+const overlay = document.getElementById("authOverlay");
+const paneLogin = document.getElementById("paneLogin"), paneSignup = document.getElementById("paneSignup");
+let afterAuth = null;
+document.getElementById("sidePerks").innerHTML = [
+  `${LEAVES}+ sezioni organizzate per materia`,
+  "25 accessi studenti inclusi per ogni classe",
+  "Raccolta dati protetta",
+  "Disdici quando vuoi"
+].map(t=>`<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${t}</li>`).join("");
+
+document.getElementById("roles").innerHTML = ROLES.map(r=>`<label><input type="radio" name="ruolo" value="${r.v}"><span>
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${r.ico}</svg>${r.l}</span></label>`).join("");
+document.getElementById("sOrdine").innerHTML = `<option value="">Seleziona…</option>` +
+  MENU.filter(m=>!m.soon).map(m=>`<option value="${m.slug}">${m.label}</option>`).join("") + `<option value="tutti">Più ordini di scuola</option>`;
+
+function setTab(t){
+  paneLogin.hidden = t!=="login"; paneSignup.hidden = t!=="signup";
+  overlay.querySelectorAll(".tabs button").forEach(b=>{ b.classList.toggle("on", b.dataset.tab===t); b.setAttribute("aria-selected", b.dataset.tab===t); });
+  setTimeout(()=>{ const f = (t==="login"?paneLogin:paneSignup).querySelector("input:not([type=radio]):not([type=checkbox])"); f && f.focus(); }, 60);
+}
+function openAuth(tab="login", msg="", then=null){
+  afterAuth = then;
+  const cm = document.getElementById("ctxMsg"); cm.textContent = msg; cm.classList.toggle("show", !!msg);
+  overlay.querySelectorAll(".form-err").forEach(e=>e.classList.remove("show"));
+  overlay.querySelectorAll(".field.bad").forEach(e=>e.classList.remove("bad"));
+  overlay.classList.add("show"); overlay.setAttribute("aria-hidden","false");
+  document.body.classList.remove("menu-open");
+  setTab(tab);
+}
+function closeAuth(){ overlay.classList.remove("show"); overlay.setAttribute("aria-hidden","true"); }
+document.getElementById("authClose").onclick = closeAuth;
+overlay.addEventListener("mousedown", e=>{ if(e.target===overlay) closeAuth(); });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ closeAuth(); closeMenus(); } });
+overlay.addEventListener("click", e=>{ const b=e.target.closest("[data-tab]"); if(b) setTab(b.dataset.tab); });
+
+// mostra/nascondi password
+const eyeOpen = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg>';
+const eyeShut = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.9 17.9A10 10 0 0 1 12 19c-7 0-11-7-11-7a18 18 0 0 1 5.1-5.9M9.9 5.2A9 9 0 0 1 12 5c7 0 11 7 11 7a18 18 0 0 1-2.2 3.2M1 1l22 22"/><path d="M14.1 14.1a3 3 0 1 1-4.2-4.2"/></svg>';
+overlay.querySelectorAll(".eye").forEach(b=>{
+  b.innerHTML = eyeOpen;
+  b.onclick = ()=>{ const i=b.previousElementSibling; const show=i.type==="password"; i.type=show?"text":"password"; b.innerHTML=show?eyeShut:eyeOpen; b.setAttribute("aria-label", show?"Nascondi password":"Mostra password"); };
+});
+
+// misuratore password
+const sPass = document.getElementById("sPass");
+sPass.addEventListener("input", ()=>{
+  const v=sPass.value; let s=0;
+  if(v.length>=8) s++; if(/[A-Z]/.test(v)&&/[a-z]/.test(v)) s++; if(/\d/.test(v)) s++; if(/[^A-Za-z0-9]/.test(v)||v.length>=12) s++;
+  if(!v) s=0;
+  const cols=["#e06a4f","#f2a33a","#c9c23a","#5fb49c"], lbl=["Debole","Discreta","Buona","Ottima"];
+  document.querySelectorAll("#meter i").forEach((i,n)=>i.style.background = n<s ? cols[s-1] : "");
+  document.getElementById("meterL").textContent = v ? "Sicurezza: "+lbl[Math.max(s,1)-1] : "";
+});
+
+const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+function mark(el, bad){ el.closest(".field").classList.toggle("bad", bad); return !bad; }
+function busy(btn, on, label){
+  if(on){ btn.dataset.l = btn.innerHTML; btn.disabled=true; btn.innerHTML = `<span class="spin"></span>${label}`; }
+  else { btn.disabled=false; btn.innerHTML = btn.dataset.l; }
+}
+function formError(id, msg){ const e=document.getElementById(id); e.textContent=msg; e.classList.toggle("show", !!msg); }
+overlay.addEventListener("input", e=>{ const f=e.target.closest(".field.bad"); if(f) f.classList.remove("bad"); });
+
+// LOGIN
+async function doLogin(email, pass, remember, btn){
+  formError("loginErr","");
+  busy(btn, true, "Accesso in corso…");
+  await wait(850);
+  const u = users().find(x=>x.email===email.toLowerCase());
+  busy(btn, false);
+  if(!u){ formError("loginErr","Non troviamo un account con questa email. Vuoi registrarti?"); return; }
+  if(u.pass!==fakeHash(pass)){ formError("loginErr","Password errata. Riprova o usa “Password dimenticata?”."); return; }
+  startSession(u.email, remember);
+  onAuthenticated(`Bentornato, ${u.nome}!`);
+}
+document.getElementById("loginForm").addEventListener("submit", e=>{
+  e.preventDefault();
+  const em=document.getElementById("lEmail"), pw=document.getElementById("lPass");
+  const ok = [mark(em, !emailOk(em.value.trim())), mark(pw, !pw.value)].every(Boolean);
+  if(ok) doLogin(em.value.trim(), pw.value, document.getElementById("lRemember").checked, e.target.querySelector("[type=submit]"));
+});
+document.getElementById("demoLogin").onclick = e=>{
+  document.getElementById("lEmail").value="demo@risorsedidattiche.it";
+  document.getElementById("lPass").value="demo1234";
+  doLogin("demo@risorsedidattiche.it","demo1234", true, e.currentTarget);
+};
+document.getElementById("forgot").onclick = ()=>{
+  const em=document.getElementById("lEmail");
+  if(!mark(em, !emailOk(em.value.trim()))){ em.focus(); return; }
+  showToast(`Simulazione: link di reimpostazione inviato a ${em.value.trim()}`);
+};
+
+// SIGNUP
+document.getElementById("signupForm").addEventListener("submit", async e=>{
+  e.preventDefault();
+  formError("signupErr","");
+  const g = id=>document.getElementById(id);
+  const ruolo = e.target.querySelector("input[name=ruolo]:checked");
+  const checks = [
+    mark(g("roles"), !ruolo),
+    mark(g("sNome"), !g("sNome").value.trim()),
+    mark(g("sCognome"), !g("sCognome").value.trim()),
+    mark(g("sEmail"), !emailOk(g("sEmail").value.trim())),
+    mark(g("sOrdine"), !g("sOrdine").value),
+    mark(g("sPass"), g("sPass").value.length<8),
+    mark(g("sTerms"), !g("sTerms").checked)
+  ];
+  if(!checks.every(Boolean)){ const f=e.target.querySelector(".field.bad input, .field.bad select"); f&&f.focus(); return; }
+  const email = g("sEmail").value.trim().toLowerCase();
+  const btn = e.target.querySelector("[type=submit]");
+  busy(btn, true, "Creazione account…");
+  await wait(1100);
+  busy(btn, false);
+  const list = users();
+  if(list.some(u=>u.email===email)){ formError("signupErr","Esiste già un account con questa email. Prova ad accedere."); return; }
+  const u = { nome:g("sNome").value.trim(), cognome:g("sCognome").value.trim(), email, pass:fakeHash(g("sPass").value),
+    ruolo:ruolo.value, ordine:g("sOrdine").value, news:g("sNews").checked, creato:new Date().toISOString() };
+  list.push(u); saveUsers(list);
+  startSession(email, true);
+  e.target.reset(); sPass.dispatchEvent(new Event("input"));
+  onAuthenticated(`Account creato! Benvenuto, ${u.nome} 🎉`);
+});
+
+function onAuthenticated(msg){
+  closeAuth(); refreshAuthUI(); showToast(msg);
+  const fn = afterAuth; afterAuth = null;
+  if(fn) fn(); else render();
+}
+
+// ======================================================================
+//  MENU LATERALE
+// ======================================================================
+const chev = '<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+function renderItems(items, depth){
+  return items.map(it=>{
+    if(it.children){
+      return `<div class="grp" data-slug="${it.slug}">
+        <button class="toggle" aria-expanded="false">
+          ${depth===0 ? `<span class="dot" style="background:${it.color}"></span>` : ""}
+          <span class="lbl">${it.label}</span>${chev}
+        </button>
+        <div class="sub">
+          <a class="link" href="#${it.slug}"><span>Panoramica</span></a>
+          ${renderItems(it.children, depth+1)}
+        </div>
+      </div>`;
+    }
+    if(depth===0){
+      return `<div class="grp"><a class="toggle link" href="#${it.slug}">
+        <span class="dot" style="background:${it.color}"></span><span class="lbl">${it.label}</span>
+        ${it.soon ? '<span class="soon">Coming soon</span>' : ""}</a></div>`;
+    }
+    return `<a class="link" href="#${it.slug}"><span>${it.label}</span>${it.soon ? '<span class="soon">Coming soon</span>' : ""}</a>`;
+  }).join("");
+}
+const nav = document.getElementById("nav");
+nav.innerHTML = renderItems(MENU, 0) + `<div class="nav-sep"></div>
+  <div class="grp"><a class="toggle link price-link" href="#prezzi">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></svg>
+    <span class="lbl">Prezzi</span></a></div>`;
+nav.addEventListener("click", e=>{
+  const t = e.target.closest("button.toggle");
+  if(t){ const g=t.parentElement; g.classList.toggle("open"); t.setAttribute("aria-expanded", g.classList.contains("open")); }
+  if(e.target.closest("a")) document.body.classList.remove("menu-open");
+});
+document.getElementById("menuBtn").onclick = ()=>document.body.classList.add("menu-open");
+document.getElementById("scrim").onclick = ()=>document.body.classList.remove("menu-open");
+
+// click globali: apertura modal, menu utente, logout, CTA prezzi
+function closeMenus(){ document.querySelectorAll(".dropdown.show").forEach(d=>d.classList.remove("show")); }
+document.addEventListener("click", e=>{
+  const a = e.target.closest("[data-auth]");
+  if(a){ e.preventDefault(); openAuth(a.dataset.auth, a.dataset.msg||""); return; }
+  const um = e.target.closest("[data-usermenu]");
+  if(um){ const d=um.nextElementSibling; const was=d.classList.contains("show"); closeMenus(); if(!was) d.classList.add("show"); return; }
+  if(e.target.closest("[data-logout]")){ closeMenus(); logout(); return; }
+  if(!e.target.closest(".dropdown")) closeMenus();
+  if(e.target.closest(".dropdown a")) closeMenus();
+  const d = e.target.closest("[data-demo]");
+  if(d){
+    if(!currentUser()){
+      openAuth("signup", `Crea un account gratuito per attivare il piano “${d.dataset.plan}”.`, ()=>{ location.hash="#prezzi"; render(); showToast("Sito demo: l'acquisto non è ancora attivo"); });
+    } else showToast("Sito demo: l'acquisto non è ancora attivo");
+  }
+});
+
+// ======================================================================
+//  CONTENUTI
+// ======================================================================
+const content = document.getElementById("content");
+const bookIco = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c97a14" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4h7a3 3 0 0 1 3 3v13a2 2 0 0 0-2-2H2z"/><path d="M22 4h-7a3 3 0 0 0-3 3v13a2 2 0 0 1 2-2h8z"/></svg>';
+const clockIco = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#c97a14" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+const check = c => `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>`;
+const ic = (p, c) => `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+
+function card(it){
+  const n = it.children ? `${it.children.length} sezioni` : (it.soon ? "Coming soon" : "Risorse in arrivo");
+  return `<a class="card" href="#${it.slug}"><span class="bar" style="background:${it.color}"></span><h3>${it.label}</h3><p>${n}</p></a>`;
+}
+
+function renderHome(){
+  const u = currentUser();
+  const levels = MENU.filter(m=>!m.soon).length;
+  const top = u ? `
+    <div class="welcome">
+      <span class="avatar">${esc(initials(u))}</span>
+      <div class="tx"><h3>Ciao ${esc(u.nome)}, bentornato!</h3>
+        <p>Profilo ${esc(ROLE_LABEL[u.ruolo]||"")}${PAGES[u.ordine] ? " · "+esc(PAGES[u.ordine].label) : ""} · Nessun piano attivo</p></div>
+      ${PAGES[u.ordine] ? `<a class="btn btn-outline" href="#${u.ordine}">Vai ai tuoi materiali</a>` : ""}
+      <a class="btn btn-primary" href="#prezzi">Attiva un piano</a>
+    </div>` : `
+    <section class="hero">
+      <div>
+        <span class="pill">Nuovo anno scolastico 2026/27</span>
+        <h2>Lezioni pronte in pochi minuti, <em>per ogni classe.</em></h2>
+        <p class="lead">Schede, giochi e materiali didattici organizzati per ordine di scuola e materia: dall'infanzia alle superiori. Scegli, condividi con la classe, insegna.</p>
+        <div class="hero-ctas">
+          <button class="btn btn-primary btn-lg" data-auth="signup">Crea un account gratuito
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          <a class="btn btn-outline btn-lg" href="#prezzi">Scopri i piani</a>
+        </div>
+        <div class="reassure">
+          <span>${check("var(--ok)")} Registrazione gratuita</span>
+          <span>${check("var(--ok)")} Nessuna carta richiesta</span>
+          <span>${check("var(--ok)")} Dati protetti</span>
+        </div>
+      </div>
+      <div class="mock" aria-hidden="true">
+        <div class="mock-panel mock-main">
+          <div class="mh"><strong>Classe 2B</strong><span>Matematica</span></div>
+          <div class="mrow"><span class="sw" style="background:#e6f3ee">${ic('<path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/>',"#3f9a80")}</span><div class="tx"><b>Le frazioni equivalenti</b><i>Scheda · 2 pagine</i></div><span class="tag">Assegnata</span></div>
+          <div class="mrow"><span class="sw" style="background:#fdf0dc">${ic('<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M8 14s1.5 2 4 2 4-2 4-2"/>',"#c97a14")}</span><div class="tx"><b>Tombola dei numeri primi</b><i>Gioco didattico</i></div><span class="tag">Nuovo</span></div>
+          <div class="mrow"><span class="sw" style="background:#e9f0fa">${ic('<path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/>',"#4f7fb8")}</span><div class="tx"><b>Verifica: geometria piana</b><i>Quiz · 15 domande</i></div><span class="tag">Bozza</span></div>
+        </div>
+        <div class="mock-panel mock-chip"><span class="ring"></span><div><b>19 / 25 studenti</b><span>hanno aperto la scheda</span></div></div>
+        <div class="mock-panel mock-badge">${ic('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',"#f2a33a")} Dati protetti</div>
+      </div>
+    </section>`;
+
+  content.innerHTML = `
+    ${top}
+    ${u ? "" : `
+    <div class="stats">
+      <div class="stat"><b>${levels}</b><span>ordini di scuola</span></div>
+      <div class="stat"><b>${LEAVES}+</b><span>sezioni per materia</span></div>
+      <div class="stat"><b>25</b><span>accessi studenti per classe</span></div>
+      <div class="stat"><b>5 €</b><span>il piano più piccolo, all'anno</span></div>
+    </div>`}
+
+    <section class="sec">
+      <div class="sec-head"><span class="eyebrow">Esplora</span><h3>Trova i materiali per la tua scuola</h3>
+        <p>Ogni risorsa è catalogata per ordine di scuola e materia, così trovi subito quello che ti serve.</p></div>
+      <div class="cards">${MENU.map(card).join("")}</div>
+    </section>
+
+    ${u ? "" : `
+    <section class="sec">
+      <div class="sec-head"><span class="eyebrow">Perché sceglierci</span><h3>Pensato da chi sta in classe ogni giorno</h3>
+        <p>Niente ricerche infinite tra siti diversi: un unico posto ordinato, aggiornato e sicuro.</p></div>
+      <div class="feats">
+        <div class="feat"><span class="fi" style="background:#fdf0dc">${ic('<path d="M3 7h18M3 12h18M3 17h12"/>',"#c97a14")}</span><div><h4>Tutto in ordine</h4><p>Materiali divisi per ordine di scuola e per materia, dall'infanzia alla secondaria di secondo grado.</p></div></div>
+        <div class="feat"><span class="fi" style="background:#e6f3ee">${ic('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 1.5 6 4.5"/>',"#3f9a80")}</span><div><h4>Per tutta la classe</h4><p>Ogni classe include 25 accessi gratuiti per gli studenti: condividi i materiali senza costi extra.</p></div></div>
+        <div class="feat"><span class="fi" style="background:#e9f0fa">${ic('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',"#4f7fb8")}</span><div><h4>Dati protetti</h4><p>La raccolta dei dati degli studenti è protetta: pensata per l'uso a scuola, anche con i minori.</p></div></div>
+        <div class="feat"><span class="fi" style="background:#fbe7e1">${ic('<rect x="2" y="6" width="20" height="12" rx="4"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"/>',"#d9694a")}</span><div><h4>Imparare giocando</h4><p>Giochi didattici per ogni ordine di scuola, per ripassare e coinvolgere anche i più distratti.</p></div></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><span class="eyebrow">Come funziona</span><h3>Pronti in tre passi</h3></div>
+      <div class="steps">
+        <div class="step"><h4>Crea il tuo account</h4><p>Registrazione gratuita in 30 secondi: scegli il tuo profilo e l'ordine di scuola.</p></div>
+        <div class="step"><h4>Scegli il piano</h4><p>Dal singolo corso a 5 €/anno fino all'intero istituto: paghi solo ciò che usi.</p></div>
+        <div class="step"><h4>Porta tutto in classe</h4><p>Condividi schede e giochi con gli studenti grazie agli accessi inclusi.</p></div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><span class="eyebrow">Per chi è</span><h3>Un piano per ogni esigenza</h3>
+        <p>Abbonamenti annuali semplici, senza sorprese.</p></div>
+      <div class="auds">
+        ${PLANS.map(p=>{ const t=p.tiers[0]; return `<a class="audc" href="#prezzi" style="--tc:${p.color}">
+          <h4>${p.title}</h4><p>${p.sub}</p>
+          <div class="from">${t.from||p.tiers.length>1?"da ":""}<b>${euro(t.amt)} €</b>${t.per}</div></a>`; }).join("")}
+      </div>
+    </section>
+
+    <section class="sec">
+      <div class="sec-head"><span class="eyebrow">Domande frequenti</span><h3>Hai qualche dubbio?</h3></div>
+      <div class="faq">
+        <details><summary>La registrazione è davvero gratuita?</summary><p>Sì. Crei l'account senza inserire una carta di credito e puoi esplorare il catalogo. Scegli un piano solo quando sei pronto ad accedere alle risorse.</p></details>
+        <details><summary>Come funzionano gli accessi per gli studenti?</summary><p>Ogni classe inclusa nel tuo piano comprende 25 accessi gratuiti: gli studenti possono aprire i materiali che condividi senza pagare nulla.</p></details>
+        <details><summary>Posso usarlo per tutta la scuola?</summary><p>Sì, il piano Istituti Scolastici parte da 10 classi. Richiedi un preventivo e lo costruiamo sulle esigenze del tuo istituto.</p></details>
+        <details><summary>Organizzo corsi pomeridiani: c'è un piano per me?</summary><p>Certo: per doposcuola, associazioni ed enti formativi prepariamo un pacchetto su misura, a partire da 500 €.</p></details>
+      </div>
+    </section>
+
+    <div class="band">
+      <div><h3>Inizia oggi, è gratis.</h3><p>Crea il tuo account e trova i materiali per la prossima lezione.</p></div>
+      <div class="btns"><button class="btn btn-primary btn-lg" data-auth="signup">Registrati gratis</button><button class="btn btn-outline btn-lg" data-auth="login">Ho già un account</button></div>
+    </div>`}`;
+}
+
+function renderAccount(){
+  const u = currentUser();
+  if(!u){ location.hash="#home"; openAuth("login","Accedi per vedere il tuo account.", ()=>{ location.hash="#account"; }); return; }
+  const data = new Date(u.creato).toLocaleDateString("it-IT",{day:"numeric",month:"long",year:"numeric"});
+  content.innerHTML = `
+    <div class="crumbs"><span>Il mio account</span></div>
+    <h2>Ciao, ${esc(u.nome)}</h2>
+    <p class="lead">Gestisci il tuo profilo e il tuo abbonamento.</p>
+    <div class="acc-grid">
+      <div class="box"><h3>Profilo</h3>
+        <dl class="kv">
+          <dt>Nome</dt><dd>${esc(u.nome)} ${esc(u.cognome)}</dd>
+          <dt>Email</dt><dd>${esc(u.email)}</dd>
+          <dt>Profilo</dt><dd>${esc(ROLE_LABEL[u.ruolo]||"–")}</dd>
+          <dt>Scuola</dt><dd>${PAGES[u.ordine] ? esc(PAGES[u.ordine].label) : "Più ordini di scuola"}</dd>
+          <dt>Iscritto dal</dt><dd>${data}</dd>
+          <dt>Newsletter</dt><dd>${u.news ? "Attiva" : "Non attiva"}</dd>
+        </dl>
+      </div>
+      <div class="box"><h3>Abbonamento</h3>
+        <span class="status">● Nessun piano attivo</span>
+        <p style="color:var(--muted);line-height:1.5;margin:14px 0 0">Attiva un piano per sbloccare le risorse e gli accessi per i tuoi studenti.</p>
+        <a class="btn btn-primary" href="#prezzi">Scegli un piano</a>
+      </div>
+    </div>
+    <div style="margin-top:24px"><button class="btn btn-outline" data-logout>Esci dall'account</button></div>`;
+}
+
+function render(){
+  const slug = (location.hash || "#home").slice(1);
+  const page = PAGES[slug];
+  closeMenus();
+  content.classList.toggle("wide", !page && slug!=="prezzi" && slug!=="account");
+  document.querySelectorAll(".link").forEach(a=>a.classList.toggle("active", a.getAttribute("href")==="#"+slug));
+  if(slug==="prezzi"){ renderPrices(); window.scrollTo(0,0); return; }
+  if(slug==="account"){ renderAccount(); window.scrollTo(0,0); return; }
+  if(page){ page.trail.forEach(t=>{ const g=nav.querySelector(`.grp[data-slug="${t.slug}"]`); if(g){g.classList.add("open");} }); }
+
+  if(!page){ renderHome(); window.scrollTo(0,0); return; }
+  const crumbs = `<div class="crumbs">${page.trail.map(t=>`<span>${t.label}</span>`).join("")}</div>`;
+  if(page.children){
+    content.innerHTML = `${crumbs}<h2>${page.label}</h2>
+      <p class="lead">Seleziona una sezione per vedere le risorse disponibili.</p>
+      <div class="cards">${page.children.map(card).join("")}</div>`;
+  } else if(page.soon){
+    content.innerHTML = `${crumbs}<h2>${page.label}</h2>
+      <p class="lead">Questa sezione è in preparazione.</p>
+      <div class="placeholder"><div class="ico">${clockIco}</div><h3>Coming soon</h3><p>Stiamo raccogliendo i materiali: torna a trovarci presto.</p>
+      ${currentUser() ? "" : `<button class="btn btn-primary" data-auth="signup" data-msg="Registrati: ti avviseremo quando la sezione “${page.label}” sarà pronta.">Avvisami quando è pronta</button>`}</div>`;
+  } else {
+    content.innerHTML = `${crumbs}<h2>${page.label}</h2>
+      <p class="lead">Qui compariranno le risorse didattiche di questa sezione.</p>
+      <div class="placeholder"><div class="ico">${bookIco}</div><h3>Nessuna risorsa ancora</h3><p>I contenuti verranno aggiunti nelle prossime versioni del sito.</p>
+      ${currentUser() ? "" : `<button class="btn btn-primary" data-auth="signup">Crea un account gratuito</button>`}</div>`;
+  }
+  window.scrollTo(0,0);
+}
+
+// ---- pagina prezzi ----
+const CLASS_PERKS = ["25 accessi gratuiti per gli studenti per ogni classe","Raccolta dati protetta"];
+const PLANS = [
+  { title:"Singolo utente", sub:"Per chi studia o si prepara in autonomia", color:"var(--c-pri)", tiers:[
+    { name:"Base", amt:5, per:"/anno", qty:"1 corso", perks:["Accesso a tutte le risorse del corso scelto"], cta:"Scegli Base" },
+    { name:"Plus", amt:20, per:"/anno", qty:"10 corsi", perks:["Accesso a tutte le risorse dei corsi scelti"], cta:"Scegli Plus" }
+  ]},
+  { title:"Professore", sub:"Per i docenti che lavorano con le proprie classi · 1 sola categoria", color:"var(--c-sec1)", tiers:[
+    { name:"Professore", from:true, amt:100, per:"/anno", qty:"6 classi", perks:["1 categoria a scelta", ...CLASS_PERKS], cta:"Scegli piano" },
+    { name:"Professore Plus", amt:200, per:"/anno", qty:"15 classi", perks:["1 categoria a scelta", ...CLASS_PERKS], cta:"Scegli piano" }
+  ]},
+  { title:"Istituti Scolastici", sub:"Per scuole e istituti comprensivi", color:"var(--c-sec2)", tiers:[
+    { name:"Istituto", from:true, amt:1000, per:"/anno", qty:"10 classi", perks:CLASS_PERKS, cta:"Richiedi un preventivo", alt:true }
+  ]},
+  { title:"Organizzazione Corsi Pomeridiani", sub:"Per doposcuola, associazioni ed enti formativi", color:"var(--c-inf)", tiers:[
+    { name:"Corsi pomeridiani", from:true, amt:500, per:"", qty:"Su misura per la tua organizzazione", perks:["Pacchetto definito in base alle esigenze"], cta:"Richiedi un preventivo", alt:true }
+  ]}
+];
+const euro = n => n.toLocaleString("it-IT");
+function renderPrices(){
+  content.innerHTML = `
+    <span class="pill">Prezzi</span>
+    <h2>Scegli il piano giusto per te</h2>
+    <p class="lead">Dal singolo utente all'intero istituto: abbonamenti annuali semplici, senza sorprese.</p>
+    <div class="note">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2f8a6f" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <p><strong>Ogni classe include 25 accessi gratuiti per gli studenti</strong> e la raccolta dati protetta.</p>
+    </div>
+    ${PLANS.map(p=>`
+      <section class="aud">
+        <div class="aud-head"><h3>${p.title}</h3><p>${p.sub}</p></div>
+        <div class="tiers">${p.tiers.map(t=>`
+          <div class="tier" style="--tc:${p.color}">
+            <div class="name">${t.name}</div>
+            <div class="price">${t.from?'<span class="from">da</span>':''}<span class="amt">${euro(t.amt)} €</span><span class="per">${t.per}</span></div>
+            <div class="qty">${t.qty}</div>
+            <ul>${t.perks.map(k=>`<li>${check("#2f8a6f")}<span>${k}</span></li>`).join("")}</ul>
+            <button class="cta ${t.alt?'alt':''}" data-demo data-plan="${t.name}">${t.cta}</button>
+          </div>`).join("")}
+        </div>
+      </section>`).join("")}`;
+}
+
+const toast = document.createElement("div"); toast.className="toast"; document.body.appendChild(toast);
+let toastT;
+function showToast(msg){
+  toast.textContent = msg; toast.classList.add("show"); clearTimeout(toastT);
+  toastT = setTimeout(()=>toast.classList.remove("show"), 2600);
+}
+
+const appbar = document.getElementById("appbar");
+window.addEventListener("scroll", ()=>appbar.classList.toggle("scrolled", window.scrollY>8), {passive:true});
+window.addEventListener("hashchange", render);
+refreshAuthUI();
+render();
+</script>
+</body>
+</html>
