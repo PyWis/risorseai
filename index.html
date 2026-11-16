@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Risorse Didattiche</title>
-<meta name="description" content="Materiali didattici pronti, generazione con AI e classi in tempo reale per la scuola italiana.">
+<meta name="description" content="Materiali didattici pronti, scritti da docenti, con classi in tempo reale per la scuola italiana.">
 <meta name="theme-color" content="#1f3a4d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -319,17 +319,17 @@
   .res .meta,.v-meta{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;font-weight:700;color:var(--muted)}
   .res .meta span,.v-meta span{display:inline-flex;align-items:center;gap:5px}
   .tbadge{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;padding:4px 9px;border-radius:20px}
-  .t-quiz{background:#e9f0fa;color:#3d6aa3} .t-scheda{background:#e6f3ee;color:#2d7a64} .t-gioco{background:#fbe7e1;color:#b8553a} .t-ai{background:#f1e9fa;color:#7a4fae}
+  .t-quiz{background:#e9f0fa;color:#3d6aa3} .t-scheda{background:#e6f3ee;color:#2d7a64} .t-gioco{background:#fbe7e1;color:#b8553a}
   .lockb,.freeb{font-size:11.5px;font-weight:800;padding:3px 9px;border-radius:20px;display:inline-flex;gap:4px;align-items:center;white-space:nowrap}
   .lockb{color:#9a5d0b;background:var(--accent-soft)}
   .freeb{color:var(--ok);background:#eaf5f1}
   .sub-sec{font-family:"Fraunces",serif;font-size:24px;margin:44px 0 16px}
-  .ai-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#f6f0fc;border:1px solid #e6d9f3;border-radius:18px;padding:18px 20px;margin-top:28px}
-  .ai-cta .tx{flex:1;min-width:220px}
-  .ai-cta b{display:block;font-size:16px}
-  .ai-cta span{color:var(--muted);font-size:14.5px}
-  .btn-ai{background:#7a4fae;color:#fff}
-  .btn-ai:hover{filter:brightness(1.1)}
+  .collab-cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;background:#eaf5f1;border:1px solid #cfe7df;border-radius:18px;padding:18px 20px;margin-top:28px}
+  .collab-cta .tx{flex:1;min-width:220px}
+  .collab-cta b{display:block;font-size:16px}
+  .collab-cta span{color:var(--muted);font-size:14.5px}
+  .collab-cta .coin{width:48px;height:48px;border-radius:50%;background:var(--accent);color:#2a1d07;display:grid;place-items:center;font-family:"Fraunces",serif;font-weight:700;font-size:14px;flex-shrink:0}
+  .byline{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:800;color:var(--ok)}
 
   /* ---------- Visualizzatore ---------- */
   .v-head{margin-bottom:20px}
@@ -348,7 +348,6 @@
   .sheet li{margin-bottom:5px}
   .sheet ol.ex li{margin-bottom:14px}
   .wl{display:block;border-bottom:1px dotted #b9b2a4;height:26px}
-  .sheet a{color:#7a4fae;font-weight:800}
   .sh-foot{margin-top:28px;padding-top:10px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);font-weight:700}
   .quiz{display:flex;flex-direction:column;gap:14px;max-width:820px}
   .qcard{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px}
@@ -411,77 +410,29 @@
   .inline-form{display:flex;flex-direction:row;gap:12px;flex-wrap:wrap;align-items:flex-end}
   .inline-form .field{flex:1;min-width:170px}
 
-  /* ---------- Generatore AI ---------- */
-  .gen{display:grid;grid-template-columns:350px 1fr;gap:24px;align-items:start}
-  .gen-form{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;position:sticky;top:80px}
-  .gen-form form{gap:16px}
+  /* ---------- Collabora ---------- */
+  .collab{display:grid;grid-template-columns:1.25fr .75fr;gap:20px;align-items:start}
+  .collab-side{display:flex;flex-direction:column;gap:16px;position:sticky;top:80px}
+  .collab textarea{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:14.5px;line-height:1.5;color:var(--ink);background:#fff;outline:none;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+  .collab textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(242,163,58,.15)}
+  .field.bad textarea{border-color:var(--err)}
+  .fmt{margin:0 0 8px;font-size:13px;color:var(--muted);line-height:1.45;font-weight:600}
+  .field .fmt:last-child{margin:6px 0 0}
   .seg{display:flex;background:var(--bg);border-radius:12px;padding:4px}
   .seg button{flex:1;border:0;background:none;padding:9px;border-radius:9px;font-weight:800;font-size:14px;cursor:pointer;color:var(--muted)}
   .seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(34,48,60,.1)}
-  .sugg{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-  .gen-out .placeholder{padding:56px 32px}
-  .demo-flag{display:inline-flex;gap:6px;align-items:center;background:#f1e9fa;color:#7a4fae;font-weight:800;font-size:12.5px;padding:6px 12px;border-radius:20px;margin-bottom:14px}
-  .thinking{display:flex;flex-direction:column;gap:10px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;margin-bottom:16px;max-width:820px}
-  .thinking div{display:flex;gap:10px;align-items:center;color:var(--muted);font-weight:700;font-size:14.5px}
-  .thinking .spin{border-color:rgba(34,48,60,.15);border-top-color:var(--ink);width:16px;height:16px}
-  .thinking .dn{color:var(--ink)}
+  .perks{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:9px}
+  .perks li{display:flex;gap:9px;font-size:14.5px;line-height:1.4}
+  .perks li svg{flex-shrink:0;margin-top:2px}
+  .prop{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-top:1px solid var(--line)}
+  .prop:first-of-type{border-top:0;padding-top:0}
+  .prop .pt{font-weight:800;color:inherit;text-decoration:none}
+  .prop .pt:hover{text-decoration:underline}
+  .prop .pr{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .cred{font-family:"Fraunces",serif;font-size:17px;color:var(--ok)}
   .fade-in{animation:pop .35s}
-  .gen-err{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;max-width:820px}
-  .gen-err h3{margin:0 0 6px}
-
-  /* ---------- Investitori ---------- */
-  .inv-hero{background:var(--side);color:#fff;border-radius:28px;padding:56px 52px;position:relative;overflow:hidden;margin-bottom:64px}
-  .inv-hero::after{content:"";position:absolute;right:-90px;bottom:-110px;width:340px;height:340px;border-radius:50%;background:rgba(242,163,58,.16)}
-  .inv-hero .pill{background:rgba(242,163,58,.18);color:var(--accent)}
-  .inv-hero h2{font-size:46px;max-width:780px;margin-bottom:16px}
-  .inv-hero .lead{color:var(--side-muted);max-width:660px;margin-bottom:28px}
-  .inv-hero .hero-ctas{position:relative;z-index:1;margin:0}
-  .inv-hero .btn-outline{color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.3)}
-  .inv-hero .btn-outline:hover{background:rgba(255,255,255,.06)}
-  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-  .pcard{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:8px;color:inherit;text-decoration:none}
-  a.pcard:hover{box-shadow:0 8px 24px rgba(34,48,60,.08)}
-  .pcard .fi{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;margin-bottom:6px}
-  .pcard h4{margin:0;font-size:17.5px}
-  .pcard p{margin:0;color:var(--muted);line-height:1.5;font-size:15px}
-  .pcard .n{font-family:"Fraunces",serif;font-size:44px;line-height:1}
-  .pcard .go{margin-top:auto;padding-top:6px;font-weight:800;font-size:14px;color:#9a5d0b}
-  .src{font-size:12.5px;color:var(--muted);margin-top:12px;line-height:1.5}
-  .calc{display:grid;grid-template-columns:1.15fr .85fr;gap:28px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:28px}
-  .slider{margin-bottom:20px}
-  .slider .between{margin-bottom:6px;font-weight:800;font-size:14.5px}
-  .slider .between b{font-family:"Fraunces",serif;font-size:18px}
-  .slider small{display:block;color:var(--muted);font-size:12.5px;font-weight:600;margin-top:2px}
-  .slider input[type=range]{width:100%;accent-color:var(--accent)}
-  .arr{background:var(--accent-soft);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:12px;align-self:start}
-  .arr .lbl{font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.07em;color:#9a5d0b}
-  .arr .big{font-family:"Fraunces",serif;font-size:50px;line-height:1}
-  .arr-row{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:14.5px;border-top:1px solid rgba(0,0,0,.07);padding-top:10px}
-  .arr-row span{color:#6e5a3c}
-  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:#fff}
-  .cmp{width:100%;border-collapse:collapse;min-width:640px}
-  .cmp th,.cmp td{padding:13px 14px;text-align:center;border-bottom:1px solid var(--line);font-size:14.5px}
-  .cmp tr:last-child td{border-bottom:0}
-  .cmp th:first-child,.cmp td:first-child{text-align:left;font-weight:800}
-  .cmp thead th{background:var(--bg);font-size:13px;font-weight:800}
-  .cmp .us{background:#fff8ec;font-weight:800}
-  .mk-y{color:var(--ok);font-weight:800} .mk-n{color:var(--err);font-weight:800} .mk-p{color:#b07a1a;font-weight:800}
-  .phase{background:#fff;border:1px solid var(--line);border-radius:18px;padding:22px;position:relative}
-  .phase .ph{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
-  .phase.now{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
-  .phase.now .ph{color:#9a5d0b}
-  .phase h4{margin:6px 0 10px;font-size:17px}
-  .phase ul{margin:0;padding-left:18px;color:var(--muted);font-size:14.5px;line-height:1.5}
-  .tour{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;counter-reset:t}
-  .tour a,.tour button{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:inherit;text-align:left;cursor:pointer;font:inherit;display:flex;flex-direction:column;gap:6px;transition:transform .15s, box-shadow .15s}
-  .tour a:hover,.tour button:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(34,48,60,.08)}
-  .tour a::before,.tour button::before{counter-increment:t;content:counter(t);width:30px;height:30px;border-radius:50%;background:var(--accent-soft);color:#9a5d0b;display:grid;place-items:center;font-weight:800;font-size:14px}
-  .tour b{font-size:15px}
-  .tour span{font-size:13.5px;color:var(--muted);line-height:1.4}
-  .callout{display:flex;gap:16px;align-items:flex-start;background:#eaf5f1;border:1px solid #cfe7df;border-radius:16px;padding:18px 20px;margin-top:16px}
-  .callout svg{flex-shrink:0;margin-top:2px}
-  .callout p{margin:0;line-height:1.55}
+  .pay .credit-row{display:flex;justify-content:space-between;font-weight:700;font-size:14.5px;padding:4px 2px}
+  .pay .credit-row.tot{border-top:1px solid var(--line);margin-top:4px;padding-top:10px;font-size:16px}
 
   /* ---------- Checkout ---------- */
   .pay{background:#fff;border-radius:22px;width:100%;max-width:480px;padding:30px 30px 26px;position:relative;animation:pop .25s;max-height:calc(100vh - 40px);overflow-y:auto}
@@ -496,23 +447,16 @@
   .pay .demo-hint{margin-top:2px}
 
   @media (max-width:1100px){
-    .gen{grid-template-columns:1fr}
-    .gen-form{position:static}
-    .tour{grid-template-columns:repeat(3,1fr)}
-    .grid4{grid-template-columns:repeat(2,1fr)}
+    .collab{grid-template-columns:1fr}
+    .collab-side{position:static}
   }
   @media (max-width:860px){
     .kpis{grid-template-columns:repeat(2,1fr)}
-    .grid3,.calc{grid-template-columns:1fr}
-    .tour{grid-template-columns:repeat(2,1fr)}
-    .inv-hero{padding:36px 26px;border-radius:22px}
-    .inv-hero h2{font-size:32px}
     .sheet{padding:26px 22px}
     .asg{grid-template-columns:1fr 64px}
     .asg > div:nth-child(2){grid-column:1 / -1;order:3}
   }
   @media (max-width:520px){
-    .grid4,.tour{grid-template-columns:1fr}
     .game{grid-template-columns:1fr 1fr;gap:8px}
     .tile{padding:12px 10px;font-size:14px}
     .pay-methods{grid-template-columns:1fr}
@@ -695,8 +639,8 @@
 </div>
 
 <script>
-// Indirizzo usato dai pulsanti "Contattaci" della pagina investitori: sostituiscilo con il tuo.
-const CONTATTO = "info@risorsedidattiche.it";
+// Compenso per ogni risorsa approvata nel programma collaboratori.
+const CREDITI_RISORSA = 250;
 
 const SOON = true;
 const MENU = [
@@ -990,12 +934,39 @@ const ROLE_LABEL = Object.fromEntries(ROLES.map(r=>[r.v,r.l]));
 const DEMO_EMAIL = "demo@risorsedidattiche.it";
 
 function users(){ return store.get("rd_users", []); }
+// risorse dei docenti collaboratori approvate e pubblicate nel catalogo
+function community(){ return store.get("rd_community", []); }
+function saveCommunity(c){ store.set("rd_community", c); }
+function publish(res){
+  const c = community(); if(!c.some(r=>r.id===res.id)){ c.push(res); saveCommunity(c); }
+  if(!R.some(r=>r.id===res.id)) R.push(res);
+  buildNav();
+}
 function saveUsers(u){ store.set("rd_users", u); }
+const DEMO_PUBLISHED = { id:"c-risorgimento", type:"quiz", page:"sec1-storia", title:"Il Risorgimento in quattro domande", lvl:"Classe 2ª", mins:8,
+  desc:"Personaggi e date dell'Unità d'Italia, con spiegazioni.", autore:"Giulia Demo", autoreEmail:DEMO_EMAIL, coautori:[],
+  q:[
+    ["In che anno fu proclamato il Regno d'Italia?", ["1848","1861","1870","1915"], 1, "Il 17 marzo 1861, con Vittorio Emanuele II re d'Italia."],
+    ["Chi guidò la Spedizione dei Mille?", ["Cavour","Mazzini","Garibaldi","Vittorio Emanuele II"], 2, "Partita da Quarto, vicino a Genova, nel maggio 1860."],
+    ["Quale città divenne capitale d'Italia nel 1871?", ["Torino","Firenze","Roma","Milano"], 2, "Dopo la presa di Roma del 1870. Prima lo erano state Torino e Firenze."],
+    ["Chi fondò la Giovine Italia?", ["Giuseppe Mazzini","Giuseppe Garibaldi","Camillo Cavour","Daniele Manin"], 0, "Mazzini la fondò nel 1831, in esilio a Marsiglia."]
+  ]};
 function demoUser(){
-  return { v:2, nome:"Giulia", cognome:"Demo", email:DEMO_EMAIL, pass:fakeHash("demo1234"),
+  return { v:3, nome:"Giulia", cognome:"Demo", email:DEMO_EMAIL, pass:fakeHash("demo1234"),
     ruolo:"docente", ordine:"sec1", news:false, creato:new Date(Date.now()-86400000*41).toISOString(),
     plan:{ name:"Professore", amt:100, per:"/anno", since:new Date(Date.now()-86400000*38).toISOString() },
-    mine:[],
+    crediti:CREDITI_RISORSA,
+    proposte:[
+      { id:"p-risorgimento", stato:"approvata", quota:CREDITI_RISORSA, at:Date.now()-86400000*12, res:DEMO_PUBLISHED },
+      { id:"p-piante", stato:"revisione", at:Date.now()-86400000*2, res:{
+        id:"c-piante", type:"scheda", page:"primaria-altre-materie", title:"Le parti della pianta", lvl:"Classe 2ª · Scienze", mins:25,
+        desc:"Radice, fusto, foglie e fiore: a che cosa servono, con esercizi.", autore:"Giulia Demo", autoreEmail:DEMO_EMAIL, coautori:[],
+        sections:[
+          {h:"Obiettivo", p:"Riconoscere le parti principali di una pianta e la loro funzione."},
+          {h:"Le parti della pianta", list:["Radice: assorbe acqua e sali minerali dal terreno","Fusto: sostiene la pianta e trasporta la linfa","Foglie: producono nutrimento con la fotosintesi","Fiore: permette la riproduzione"]},
+          {h:"Rispondi", ex:["A che cosa serve la radice?","Disegna una pianta e scrivi il nome di ogni parte."]}
+        ]} }
+    ],
     classes:[
       { id:"c1", nome:"2B", materia:"Matematica", codice:"MAT-2B7K", target:22, created:0,
         assegnati:[{rid:"frazioni-equivalenti", at:0, cap:19}, {rid:"aree-poligoni", at:0, cap:14}, {rid:"capitali-europa", at:0, cap:21}] },
@@ -1008,20 +979,23 @@ function demoUser(){
 (function seed(){
   const u = users();
   const i = u.findIndex(x=>x.email===DEMO_EMAIL);
-  if(i<0) u.push(demoUser()); else if(u[i].v!==2) u[i] = demoUser();
+  if(i<0) u.push(demoUser()); else if(u[i].v!==3) u[i] = demoUser();
   saveUsers(u);
+  const c = community();
+  if(!c.some(r=>r.id===DEMO_PUBLISHED.id)){ c.push(DEMO_PUBLISHED); saveCommunity(c); }
+  community().forEach(r=>{ if(!R.some(x=>x.id===r.id)) R.push(r); });
 })();
 function currentUser(){
   const s = store.get("rd_session", null, "session") || store.get("rd_session", null);
   if(!s) return null;
   const u = users().find(u=>u.email===s.email);
-  if(u){ u.classes ||= []; u.mine ||= []; }
+  if(u){ u.classes ||= []; u.proposte ||= []; u.crediti ||= 0; }
   return u || null;
 }
 function updateUser(fn){
   const s = currentUser(); if(!s) return;
   const list = users(); const u = list.find(x=>x.email===s.email);
-  u.classes ||= []; u.mine ||= [];
+  u.classes ||= []; u.proposte ||= []; u.crediti ||= 0;
   fn(u); saveUsers(list);
 }
 const hasPlan = () => !!currentUser()?.plan;
@@ -1037,7 +1011,7 @@ function logout(){
 }
 function demoLogin(){
   startSession(DEMO_EMAIL, true); refreshAuthUI();
-  showToast("Sei dentro come Giulia, docente con piano Professore");
+  showToast("Sei dentro come Giulia: piano Professore e 250 € di crediti");
 }
 const initials = u => (u.nome[0]+(u.cognome?.[0]||"")).toUpperCase();
 
@@ -1051,7 +1025,7 @@ function refreshAuthUI(){
         <div class="dropdown">
           <div class="who"><strong>${esc(u.nome)} ${esc(u.cognome)}</strong><span>${esc(u.email)}</span></div>
           <a href="#classi">Le mie classi</a>
-          <a href="#genera">Crea con AI</a>
+          <a href="#collabora">Collabora · crediti ${euro(u.crediti||0)} €</a>
           <a href="#account">Il mio account</a>
           <button class="danger" data-logout>Esci</button>
         </div>
@@ -1062,7 +1036,7 @@ function refreshAuthUI(){
   document.querySelectorAll(".topbar .nm").forEach(n=>n.remove());
   document.getElementById("sideFoot").innerHTML = u ? `
     <div class="side-user"><span class="avatar">${esc(initials(u))}</span>
-      <div class="meta"><strong>${esc(u.nome)} ${esc(u.cognome)}</strong><a href="#account">${u.plan ? "Piano "+esc(u.plan.name) : "Il mio account"} →</a></div></div>` : `
+      <div class="meta"><strong>${esc(u.nome)} ${esc(u.cognome)}</strong><a href="#account">${u.plan ? "Piano "+esc(u.plan.name) : "Il mio account"}${u.crediti ? " · "+euro(u.crediti)+" € crediti" : ""} →</a></div></div>` : `
     <div class="side-cta"><strong>Nuovo qui?</strong>Crea un account gratuito e salva i materiali per le tue classi.
       <button class="btn btn-primary btn-sm" data-auth="signup">Registrati gratis</button></div>`;
 }
@@ -1073,7 +1047,7 @@ const paneLogin = document.getElementById("paneLogin"), paneSignup = document.ge
 let afterAuth = null;
 document.getElementById("sidePerks").innerHTML = [
   `${R.length} materiali pronti, quiz e giochi interattivi`,
-  "Lezioni su misura generate con l'AI",
+  `${CREDITI_RISORSA} € di crediti per ogni risorsa che pubblichi`,
   "25 accessi studenti inclusi per ogni classe",
   "Raccolta dati protetta · disdici quando vuoi"
 ].map(t=>`<li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>${t}</li>`).join("");
@@ -1185,7 +1159,7 @@ document.getElementById("signupForm").addEventListener("submit", async e=>{
   if(list.some(u=>u.email===email)){ formError("signupErr","Esiste già un account con questa email. Prova ad accedere."); return; }
   const u = { v:2, nome:g("sNome").value.trim(), cognome:g("sCognome").value.trim(), email, pass:fakeHash(g("sPass").value),
     ruolo:ruolo.value, ordine:g("sOrdine").value, news:g("sNews").checked, creato:new Date().toISOString(),
-    plan:null, classes:[], mine:[] };
+    plan:null, classes:[], proposte:[], crediti:0 };
   list.push(u); saveUsers(list);
   startSession(email, true);
   e.target.reset(); sPass.dispatchEvent(new Event("input"));
@@ -1203,7 +1177,7 @@ function onAuthenticated(msg){
 // ======================================================================
 const svg = (p, c="currentColor", s=24, w=2) => `<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
 const P = {
-  spark:'<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  pen:'<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/>',
   users:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 15c3 0 6 1.5 6 4.5"/>',
   tag:'<path d="M20.6 13.4l-7.2 7.2a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/>',
   chart:'<path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/>',
@@ -1252,12 +1226,18 @@ function renderItems(items, depth){
 }
 const navLink = (href, ico, label, extra="") => `<div class="grp"><a class="toggle link" href="${href}"><span class="nico">${svg(ico,"currentColor",16,2.2)}</span><span class="lbl">${label}</span>${extra}</a></div>`;
 const nav = document.getElementById("nav");
-nav.innerHTML =
-  navLink("#genera", P.spark, "Crea con AI", '<span class="soon new">Nuovo</span>') +
-  navLink("#classi", P.users, "Le mie classi") +
-  `<div class="nav-sep"></div>` + renderItems(MENU, 0) + `<div class="nav-sep"></div>` +
-  navLink("#prezzi", P.tag, "Prezzi") +
-  navLink("#investitori", P.chart, "Per investitori");
+function buildNav(){
+  const open = [...nav.querySelectorAll(".grp.open")].map(g=>g.dataset.slug);
+  nav.innerHTML =
+    navLink("#classi", P.users, "Le mie classi") +
+    navLink("#collabora", P.pen, "Collabora", `<span class="soon new">+${CREDITI_RISORSA} €</span>`) +
+    `<div class="nav-sep"></div>` + renderItems(MENU, 0) + `<div class="nav-sep"></div>` +
+    navLink("#prezzi", P.tag, "Prezzi");
+  open.forEach(sl=>nav.querySelector(`.grp[data-slug="${sl}"]`)?.classList.add("open"));
+  const h = "#" + decodeURIComponent(location.hash.slice(1));
+  nav.querySelectorAll(".link").forEach(a=>a.classList.toggle("active", a.getAttribute("href")===h));
+}
+buildNav();
 nav.addEventListener("click", e=>{
   const t = e.target.closest("button.toggle");
   if(t){ const g=t.parentElement; g.classList.toggle("open"); t.setAttribute("aria-expanded", g.classList.contains("open")); }
@@ -1303,11 +1283,17 @@ document.addEventListener("click", e=>{
   if(e.target.closest("[data-cancelplan]")){ updateUser(u=>u.plan=null); refreshAuthUI(); render(); showToast("Piano disattivato: le risorse Premium tornano bloccate"); return; }
   if(e.target.closest("[data-resetdemo]")){
     const list = users().filter(x=>x.email!==DEMO_EMAIL); list.push(demoUser()); saveUsers(list);
+    const keep = community().filter(r=>r.autoreEmail!==DEMO_EMAIL); keep.push(DEMO_PUBLISHED); saveCommunity(keep);
+    for(let i=R.length-1;i>=0;i--) if(R[i].autoreEmail===DEMO_EMAIL && R[i].id!==DEMO_PUBLISHED.id) R.splice(i,1);
+    buildNav();
     refreshAuthUI(); render(); showToast("Dati demo ripristinati"); return;
   }
+  const cp = e.target.closest("[data-cpre]");
+  if(cp && cp.dataset.cpre){ const pg = PAGES[cp.dataset.cpre]; collabPrefill = { ordine:pg.trail[0].slug, materia:pg.slug }; }
   const f = e.target.closest("[data-filter]");
   if(f){ resFilter = f.dataset.filter; render(); return; }
-  if(e.target.closest("[data-contact]")){ location.href = `mailto:${CONTATTO}?subject=${encodeURIComponent("Risorse Didattiche – richiesta incontro")}`; return; }
+  const ap = e.target.closest("[data-approve]");
+  if(ap){ approveProposal(ap.dataset.approve); return; }
 });
 async function copyText(t, msg){
   try{ await navigator.clipboard.writeText(t); }catch(e){}
@@ -1322,10 +1308,11 @@ let resFilter = "tutti";
 
 function card(it){
   const n = resUnder(it.slug).length;
-  const label = it.soon ? "Coming soon" : (n ? `${n} materiali pronti` : (it.children ? `${it.children.length} sezioni` : "Genera con AI"));
+  const label = it.soon ? "Coming soon" : (n ? `${n} materiali pronti` : (it.children ? `${it.children.length} sezioni` : "Pubblica la prima risorsa"));
   return `<a class="card" href="#${it.slug}"><span class="bar" style="background:${it.color}"></span><h3>${it.label}</h3><p>${label}</p></a>`;
 }
-const tbadge = r => `<span class="tbadge ${r.ai ? "t-ai" : TYPES[r.type].c}">${r.ai ? svg(P.spark,"currentColor",12,2.4)+" AI · " : ""}${TYPES[r.type].l}</span>`;
+const tbadge = r => `<span class="tbadge ${TYPES[r.type].c}">${TYPES[r.type].l}</span>`;
+const authors = r => [r.autore, ...(r.coautori||[]).map(e=>e.split("@")[0])].filter(Boolean).join(", ");
 function access(r){
   if(!r.premium) return '<span class="freeb">Gratis</span>';
   return hasPlan() ? '<span class="freeb">Sbloccato</span>' : `<span class="lockb">${svg(P.lock,"currentColor",12,2.4)} Premium</span>`;
@@ -1334,11 +1321,12 @@ function resCard(r){
   return `<a class="res" href="#risorsa/${r.id}">
     <div class="top">${tbadge(r)}${access(r)}</div>
     <h4>${esc(r.title)}</h4><p>${esc(r.desc)}</p>
-    <div class="meta"><span>${svg(P.clock,"currentColor",14)} ${r.mins} min</span><span>${svg(P.cap,"currentColor",14)} ${esc(r.lvl)}</span></div></a>`;
+    <div class="meta"><span>${svg(P.clock,"currentColor",14)} ${r.mins} min</span><span>${svg(P.cap,"currentColor",14)} ${esc(r.lvl)}</span></div>
+    ${r.autore ? `<span class="byline">${svg(P.pen,"currentColor",13,2.2)} di Prof. ${esc(authors(r))}</span>` : ""}</a>`;
 }
-const aiCta = (txt="Non trovi quello che cerchi?") => `<div class="ai-cta">${svg(P.spark,"#7a4fae",28)}
-  <div class="tx"><b>${txt}</b><span>Descrivi l'argomento: l'AI prepara una lezione pronta con attività e verifica.</span></div>
-  <a class="btn btn-ai" href="#genera">Crea con AI</a></div>`;
+const collabCta = (page, txt) => `<div class="collab-cta"><span class="coin">${CREDITI_RISORSA} €</span>
+  <div class="tx"><b>${txt || "Hai un materiale che funziona in classe?"}</b><span>Pubblicalo${page ? " in "+esc(page.label) : ""}: ogni risorsa approvata ti vale ${CREDITI_RISORSA} € di crediti.</span></div>
+  <a class="btn btn-dark" href="#collabora" data-cpre="${page ? page.slug : ""}">Collabora con noi</a></div>`;
 
 function renderHome(){
   const u = currentUser();
@@ -1350,13 +1338,13 @@ function renderHome(){
       <div class="tx"><h3>Ciao ${esc(u.nome)}!</h3>
         <p>Profilo ${esc(ROLE_LABEL[u.ruolo]||"")}${PAGES[u.ordine] ? " · "+esc(PAGES[u.ordine].label) : ""} · ${u.plan ? "Piano "+esc(u.plan.name)+" attivo" : "Nessun piano attivo"}</p></div>
       <a class="btn btn-outline" href="#classi">Le mie classi</a>
-      ${u.plan ? `<a class="btn btn-ai" href="#genera">${svg(P.spark,"currentColor",18)} Crea con AI</a>` : `<a class="btn btn-primary" href="#prezzi">Attiva un piano</a>`}
+      ${u.plan ? `<a class="btn btn-primary" href="#collabora">${svg(P.pen,"currentColor",18)} Collabora · +${CREDITI_RISORSA} €</a>` : `<a class="btn btn-primary" href="#prezzi">Attiva un piano</a>`}
     </div>` : `
     <section class="hero">
       <div>
         <span class="pill">Nuovo anno scolastico 2026/27</span>
         <h2>Lezioni pronte in pochi minuti, <em>per ogni classe.</em></h2>
-        <p class="lead">Schede, quiz e giochi organizzati per ordine di scuola e materia, più un assistente AI che prepara lezioni su misura. Assegna alla classe e segui i progressi in tempo reale.</p>
+        <p class="lead">Schede, quiz e giochi scritti da docenti, organizzati per ordine di scuola e materia. Assegnali alla classe e segui i progressi in tempo reale.</p>
         <div class="hero-ctas">
           <button class="btn btn-primary btn-lg" data-auth="signup">Crea un account gratuito ${svg(P.arrow,"currentColor",18,2.4)}</button>
           <button class="btn btn-outline btn-lg" data-demologin="#classi">Prova l'account demo</button>
@@ -1372,7 +1360,7 @@ function renderHome(){
           <div class="mh"><strong>Classe 2B</strong><span>Matematica</span></div>
           <div class="mrow"><span class="sw" style="background:#e6f3ee">${ic('<path d="M4 4h16v16H4z"/><path d="M4 10h16M10 4v16"/>',"#3f9a80")}</span><div class="tx"><b>Le frazioni equivalenti</b><i>Quiz · 4 domande</i></div><span class="tag">Assegnato</span></div>
           <div class="mrow"><span class="sw" style="background:#fdf0dc">${ic('<circle cx="12" cy="12" r="9"/><path d="M9 9h.01M15 9h.01M8 14s1.5 2 4 2 4-2 4-2"/>',"#c97a14")}</span><div class="tx"><b>Capitali d'Europa</b><i>Gioco didattico</i></div><span class="tag">Nuovo</span></div>
-          <div class="mrow"><span class="sw" style="background:#f1e9fa">${ic(P.spark,"#7a4fae")}</span><div class="tx"><b>Lezione: le percentuali</b><i>Generata con AI · 50 min</i></div><span class="tag">Bozza</span></div>
+          <div class="mrow"><span class="sw" style="background:#e9f0fa">${ic(P.pen,"#4f7fb8")}</span><div class="tx"><b>Il Risorgimento</b><i>Quiz · di Prof. Giulia Demo</i></div><span class="tag">Nuovo</span></div>
         </div>
         <div class="mock-panel mock-chip"><span class="ring"></span><div><b>19 / 22 studenti</b><span>hanno completato il quiz</span></div></div>
         <div class="mock-panel mock-badge">${ic(P.shield,"#f2a33a")} Dati protetti</div>
@@ -1396,6 +1384,10 @@ function renderHome(){
     </section>
 
     <section class="sec">
+      ${collabCta(null, "Sei un docente? Collabora con noi")}
+    </section>
+
+    <section class="sec">
       <div class="sec-head"><span class="eyebrow">Esplora</span><h3>Trova i materiali per la tua scuola</h3>
         <p>Ogni risorsa è catalogata per ordine di scuola e materia, così trovi subito quello che ti serve.</p></div>
       <div class="cards">${MENU.map(card).join("")}</div>
@@ -1406,8 +1398,8 @@ function renderHome(){
       <div class="sec-head"><span class="eyebrow">Perché sceglierci</span><h3>Pensato da chi sta in classe ogni giorno</h3>
         <p>Niente ricerche infinite tra siti diversi: un unico posto ordinato, aggiornato e sicuro.</p></div>
       <div class="feats">
-        <div class="feat"><span class="fi" style="background:#fdf0dc">${ic('<path d="M3 7h18M3 12h18M3 17h12"/>',"#c97a14")}</span><div><h4>Tutto in ordine</h4><p>Materiali divisi per ordine di scuola e per materia, dall'infanzia alla secondaria di secondo grado.</p></div></div>
-        <div class="feat"><span class="fi" style="background:#f1e9fa">${ic(P.spark,"#7a4fae")}</span><div><h4>Crea con l'AI</h4><p>Scrivi l'argomento e ottieni una lezione pronta con obiettivi, attività, verifica e adattamenti per BES.</p></div></div>
+        <div class="feat"><span class="fi" style="background:#fbe7e1">${ic('<path d="M3 7h18M3 12h18M3 17h12"/>',"#d9694a")}</span><div><h4>Tutto in ordine</h4><p>Materiali divisi per ordine di scuola e per materia, dall'infanzia alla secondaria di secondo grado.</p></div></div>
+        <div class="feat"><span class="fi" style="background:#fdf0dc">${ic(P.pen,"#c97a14")}</span><div><h4>Scritto da docenti</h4><p>I materiali nascono in classe: ogni docente può proporne di nuovi e riceve ${CREDITI_RISORSA} € di crediti per ognuno approvato.</p></div></div>
         <div class="feat"><span class="fi" style="background:#e6f3ee">${ic(P.users,"#3f9a80")}</span><div><h4>Classi in tempo reale</h4><p>Assegna un quiz e guarda chi lo completa e con quale punteggio. 25 accessi studenti inclusi per ogni classe.</p></div></div>
         <div class="feat"><span class="fi" style="background:#e9f0fa">${ic('<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/>',"#4f7fb8")}</span><div><h4>Dati protetti</h4><p>Raccolta dei dati degli studenti pensata per l'uso a scuola, anche con i minori.</p></div></div>
       </div>
@@ -1416,7 +1408,7 @@ function renderHome(){
     <section class="sec">
       <div class="sec-head"><span class="eyebrow">Come funziona</span><h3>Pronti in tre passi</h3></div>
       <div class="steps">
-        <div class="step"><h4>Scegli o genera</h4><p>Prendi un materiale dal catalogo o fallo creare all'AI sul tuo argomento.</p></div>
+        <div class="step"><h4>Scegli un materiale</h4><p>Schede, quiz e giochi pronti per ordine di scuola e materia, scritti da colleghi.</p></div>
         <div class="step"><h4>Assegna alla classe</h4><p>Gli studenti entrano con il codice classe: 25 accessi inclusi, senza costi per le famiglie.</p></div>
         <div class="step"><h4>Segui i progressi</h4><p>Vedi chi ha completato, i punteggi medi e dove serve ripassare.</p></div>
       </div>
@@ -1431,9 +1423,9 @@ function renderHome(){
     <section class="sec">
       <div class="sec-head"><span class="eyebrow">Domande frequenti</span><h3>Hai qualche dubbio?</h3></div>
       <div class="faq">
-        <details><summary>La registrazione è davvero gratuita?</summary><p>Sì. Crei l'account senza inserire una carta di credito e puoi usare tutti i materiali gratuiti. Scegli un piano solo quando vuoi sbloccare i contenuti Premium, l'AI e le classi.</p></details>
+        <details><summary>La registrazione è davvero gratuita?</summary><p>Sì. Crei l'account senza inserire una carta di credito e puoi usare tutti i materiali gratuiti. Scegli un piano solo quando vuoi sbloccare i contenuti Premium e le classi.</p></details>
         <details><summary>Come funzionano gli accessi per gli studenti?</summary><p>Ogni classe inclusa nel tuo piano comprende 25 accessi gratuiti: gli studenti entrano con il codice classe e aprono i materiali che assegni, senza pagare nulla.</p></details>
-        <details><summary>I contenuti generati dall'AI sono affidabili?</summary><p>L'AI prepara una bozza strutturata che il docente rivede e modifica prima di assegnarla. Il docente resta sempre l'autore finale.</p></details>
+        <details><summary>Chi scrive i materiali?</summary><p>Docenti in servizio. Ogni proposta viene controllata dalla redazione prima della pubblicazione e l'autore riceve ${CREDITI_RISORSA} € di crediti per ogni risorsa approvata.</p></details>
         <details><summary>Posso usarlo per tutta la scuola?</summary><p>Sì, il piano Istituti Scolastici parte da 10 classi. Richiedi un preventivo e lo costruiamo sulle esigenze del tuo istituto.</p></details>
         <details><summary>Organizzo corsi pomeridiani: c'è un piano per me?</summary><p>Certo: per doposcuola, associazioni ed enti formativi prepariamo un pacchetto su misura, a partire da 500 €.</p></details>
       </div>
@@ -1459,7 +1451,7 @@ function renderSection(page){
       <p class="lead">Seleziona una materia, oppure parti dai materiali in evidenza.</p>
       <div class="cards">${page.children.map(card).join("")}</div>
       ${list.length ? `<h3 class="sub-sec">In evidenza</h3><div class="res-grid">${list.slice(0,6).map(resCard).join("")}</div>` : ""}
-      ${aiCta()}`;
+      ${collabCta(page)}`;
     return;
   }
   if(page.soon){
@@ -1467,16 +1459,15 @@ function renderSection(page){
       <p class="lead">Questa sezione è in preparazione.</p>
       <div class="placeholder"><div class="ico">${clockIco}</div><h3>Coming soon</h3><p>Stiamo raccogliendo i materiali: torna a trovarci presto.</p>
       ${currentUser() ? "" : `<button class="btn btn-primary" data-auth="signup" data-msg="Registrati: ti avviseremo quando la sezione “${page.label}” sarà pronta.">Avvisami quando è pronta</button>`}</div>
-      ${aiCta("Nel frattempo, crea il tuo materiale")}`;
+      ${collabCta(page, "Vuoi contribuire a questa sezione?")}`;
     return;
   }
-  genPrefill = { ordine:page.trail[0].slug, materia:page.slug };
   if(!list.length){
     content.innerHTML = `${crumbs}<h2>${page.label}</h2>
-      <p class="lead">Il catalogo di questa materia è in arrivo. Intanto puoi creare un materiale su misura.</p>
-      <div class="placeholder"><div class="ico" style="background:#f1e9fa">${svg(P.spark,"#7a4fae",30)}</div><h3>Genera la tua prima lezione</h3>
-        <p>Scrivi l'argomento: l'AI prepara obiettivi, attività, verifica e adattamenti per BES.</p>
-        <a class="btn btn-ai" href="#genera">Crea con AI</a></div>`;
+      <p class="lead">Il catalogo di questa materia è in costruzione.</p>
+      <div class="placeholder"><div class="ico">${svg(P.pen,"#c97a14",30)}</div><h3>Sii il primo a pubblicare in ${esc(page.label)}</h3>
+        <p>Proponi una scheda, un quiz o un gioco: se viene approvato ricevi ${CREDITI_RISORSA} € di crediti.</p>
+        <a class="btn btn-primary" href="#collabora" data-cpre="${page.slug}">Proponi una risorsa</a></div>`;
     return;
   }
   const types = [...new Set(list.map(r=>r.type))];
@@ -1485,13 +1476,12 @@ function renderSection(page){
     <p class="lead">${list.length} materiali pronti da usare in classe o da assegnare agli studenti.</p>
     ${types.length>1 ? `<div class="toolbar">${["tutti",...types].map(t=>`<button class="chip ${resFilter===t?"on":""}" data-filter="${t}">${t==="tutti"?"Tutti":TYPES[t].l}</button>`).join("")}</div>` : ""}
     <div class="res-grid">${(shown.length?shown:list).map(resCard).join("")}</div>
-    ${aiCta()}`;
+    ${collabCta(page)}`;
 }
 
 // ---------- visualizzatore risorsa ----------
-let lastGenerated = null;
 function getRes(id){
-  return R.find(r=>r.id===id) || currentUser()?.mine.find(r=>r.id===id) || (lastGenerated?.id===id ? lastGenerated : null);
+  return R.find(r=>r.id===id) || currentUser()?.proposte.find(p=>p.res.id===id)?.res || null;
 }
 function sheetSection(s){
   let h = `<h5>${esc(s.h)}</h5>`;
@@ -1499,11 +1489,10 @@ function sheetSection(s){
   if(s.list) h += `<ul>${s.list.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>`;
   if(s.ol) h += `<ol>${s.ol.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>`;
   if(s.ex) h += `<ol class="ex">${s.ex.map(x=>`<li>${esc(x)}<span class="wl"></span><span class="wl"></span></li>`).join("")}</ol>`;
-  if(s.links) h += `<ul>${s.links.map(x=>`<li><a href="#risorsa/${x.id}">${esc(x.title)}</a></li>`).join("")}</ul>`;
   return h;
 }
 const sheetTop = r => `<div class="sh-top"><span>Nome: ____________</span><span>Classe: ______</span><span>Data: ______</span></div><h3>${esc(r.title)}</h3>`;
-const sheetFoot = r => `<div class="sh-foot">Risorse Didattiche · ${esc(PAGES[r.page]?.trail.map(t=>t.label).join(" › ") || "")}${r.ai ? " · bozza generata con AI, da rivedere" : ""}</div>`;
+const sheetFoot = r => `<div class="sh-foot">Risorse Didattiche · ${esc(PAGES[r.page]?.trail.map(t=>t.label).join(" › ") || "")}${r.autore ? " · di Prof. "+esc(authors(r)) : ""}</div>`;
 const sheetHTML = r => `<div class="sheet">${sheetTop(r)}${r.sections.map(sheetSection).join("")}${sheetFoot(r)}</div>`;
 const qcard = (q,i,n) => `<div class="qcard" data-a="${q[2]}"><div class="qn">Domanda ${i+1} di ${n}</div><h4>${esc(q[0])}</h4>
   <div class="opts">${q[1].map((o,j)=>`<button class="opt" data-j="${j}"><span class="k">${"ABCD"[j]}</span>${esc(o)}</button>`).join("")}</div>
@@ -1520,7 +1509,7 @@ const bodyHTML = r => r.type==="quiz" ? quizHTML(r) : r.type==="gioco" ? gameHTM
 
 function renderResource(id){
   const r = getRes(id);
-  if(!r){ content.innerHTML = `<div class="placeholder"><div class="ico">${bookIco}</div><h3>Risorsa non trovata</h3><p>Forse è stata generata in un'altra sessione.</p><a class="btn btn-primary" href="#home">Torna alla home</a></div>`; return; }
+  if(!r){ content.innerHTML = `<div class="placeholder"><div class="ico">${bookIco}</div><h3>Risorsa non trovata</h3><p>Il link potrebbe non essere più valido.</p><a class="btn btn-primary" href="#home">Torna alla home</a></div>`; return; }
   const page = PAGES[r.page];
   const u = currentUser();
   const locked = r.premium && !hasPlan();
@@ -1533,13 +1522,14 @@ function renderResource(id){
   content.innerHTML = `${crumbs}
     <div class="v-head">${tbadge(r)} ${access(r)}
       <h2>${esc(r.title)}</h2><p class="lead">${esc(r.desc)}</p>
-      <div class="v-meta"><span>${svg(P.clock,"currentColor",15)} ${r.mins} minuti</span><span>${svg(P.cap,"currentColor",15)} ${esc(r.lvl)}</span>${page?`<span>${svg(P.book,"currentColor",15)} ${esc(page.label)}</span>`:""}</div>
+      <div class="v-meta"><span>${svg(P.clock,"currentColor",15)} ${r.mins} minuti</span><span>${svg(P.cap,"currentColor",15)} ${esc(r.lvl)}</span>${page?`<span>${svg(P.book,"currentColor",15)} ${esc(page.label)}</span>`:""}${r.autore?`<span class="byline">${svg(P.pen,"currentColor",15,2.2)} di Prof. ${esc(authors(r))} · docente collaboratore</span>`:""}</div>
+      ${currentUser()?.proposte.some(p=>p.res.id===r.id && p.stato!=="approvata") ? `<p class="note" style="margin:16px 0 0"><span><strong>Anteprima della tua proposta.</strong> È in revisione: non è ancora visibile nel catalogo.</span></p>` : ""}
     </div>
     ${locked ? "" : `<div class="v-actions" data-rid="${r.id}">${assign}<span class="sp"></span>
       ${r.type==="scheda" ? `<button class="btn btn-ghost btn-sm" data-print>${svg(P.print,"currentColor",16)} Stampa / PDF</button>` : ""}
       <button class="btn btn-ghost btn-sm" data-share>${svg(P.share,"currentColor",16)} Condividi</button></div>`}
     ${locked ? `<div class="locked" aria-hidden="true">${bodyHTML(r)}</div>
-      <div class="paywall">${svg(P.lock,"#f2a33a",34)}<div class="tx"><h3>Risorsa Premium</h3><p>Sblocca questa e tutte le risorse Premium, l'AI e le classi. Piani da 5 €/anno.</p></div>
+      <div class="paywall">${svg(P.lock,"#f2a33a",34)}<div class="tx"><h3>Risorsa Premium</h3><p>Sblocca questa e tutte le risorse Premium e le classi. Piani da 5 €/anno.</p></div>
         <button class="btn btn-primary btn-lg" data-unlock>Sblocca ora</button></div>` : bodyHTML(r)}`;
 }
 function assignCurrent(){
@@ -1547,7 +1537,6 @@ function assignCurrent(){
   const cid = document.getElementById("asgSel")?.value;
   if(!rid || !cid) return;
   const r = getRes(rid);
-  if(r.ai && !currentUser().mine.some(m=>m.id===rid)) updateUser(u=>u.mine.unshift(r));
   let dup = false, nome = "";
   updateUser(u=>{ const c=u.classes.find(c=>c.id===cid); nome=c.nome;
     if(c.assegnati.some(a=>a.rid===rid)) dup = true; else c.assegnati.unshift({rid, at:Date.now()}); });
@@ -1656,8 +1645,8 @@ function renderClasses(){
         <div class="field"><label for="ncMat">Materia</label><input id="ncMat" placeholder="Es. Storia" maxlength="40"><div class="err">Inserisci la materia.</div></div>
         <button class="btn btn-primary" type="submit">Crea classe</button>
       </form></div>
-    <h3 class="sub-sec">I miei materiali generati con AI</h3>
-    ${u.mine.length ? `<div class="res-grid">${u.mine.map(resCard).join("")}</div>` : aiCta("Non hai ancora creato materiali")}`;
+    <h3 class="sub-sec">Le mie risorse pubblicate</h3>
+    ${(()=>{ const mineP = R.filter(r=>r.autoreEmail===u.email); return mineP.length ? `<div class="res-grid">${mineP.map(resCard).join("")}</div>${collabCta(null, "Pubblicane un'altra")}` : collabCta(null, "Non hai ancora pubblicato risorse"); })()}`;
   document.getElementById("newCls").addEventListener("submit", e=>{
     e.preventDefault();
     const n=document.getElementById("ncNome"), m=document.getElementById("ncMat");
@@ -1674,109 +1663,201 @@ setInterval(()=>{
   renderClasses();
 }, 3000);
 
-// ---------- generatore AI ----------
-let genPrefill = null;
-const gen = { tipo:"scheda", busy:false };
-const SUGG = ["Le frazioni equivalenti","La cellula","I principi della dinamica","Il ciclo dell'acqua","Il Rinascimento","Le energie rinnovabili","Il Medioevo"];
-function renderGen(){
+// ---------- collabora ----------
+let collabPrefill = null;
+const collab = { tipo:"scheda" };
+const COLLAB_FORMAT = {
+  scheda: { help:"Una riga per elemento. «## Titolo» apre una sezione, «- testo» crea un elenco puntato, «? testo» un esercizio con spazio per rispondere, il resto diventa testo.",
+    example:`## Obiettivo
+Riconoscere le parti principali di una pianta e la loro funzione.
+## Le parti della pianta
+- Radice: assorbe acqua e sali minerali dal terreno
+- Fusto: sostiene la pianta e trasporta la linfa
+- Foglie: producono nutrimento con la fotosintesi
+- Fiore: permette la riproduzione
+## Rispondi
+? A che cosa serve la radice?
+? Disegna una pianta e scrivi il nome di ogni parte.` },
+  quiz: { help:"Una domanda per riga: «Domanda | opzione | *opzione corretta | opzione». Metti l'asterisco davanti alla risposta giusta. Una riga che inizia con «>» aggiunge la spiegazione alla domanda precedente.",
+    example:`Qual è la capitale della Francia? | Lione | *Parigi | Marsiglia | Nizza
+> Parigi è la capitale dal Medioevo.
+Quanti lati ha un esagono? | 5 | *6 | 7 | 8
+> «Esa» in greco significa sei.` },
+  gioco: { help:"Una coppia per riga, nella forma «elemento = abbinamento». Da 3 a 8 coppie.",
+    example:`cane = dog
+gatto = cat
+cavallo = horse
+uccello = bird` }
+};
+function parseCollab(tipo, text){
+  const lines = text.split("\n").map(l=>l.trim()).filter(Boolean);
+  if(tipo==="gioco"){
+    const pairs = lines.map(l=>l.split("=").map(x=>x.trim())).filter(p=>p.length===2 && p[0] && p[1]);
+    if(pairs.length!==lines.length) return { err:"Ogni riga deve avere la forma «elemento = abbinamento»." };
+    if(pairs.length<3 || pairs.length>8) return { err:"Servono da 3 a 8 coppie." };
+    return { pairs };
+  }
+  if(tipo==="quiz"){
+    const q = [];
+    for(const l of lines){
+      if(l.startsWith(">")){ if(!q.length) return { err:"La spiegazione «>» deve seguire una domanda." }; q[q.length-1][3] = l.slice(1).trim(); continue; }
+      const parts = l.split("|").map(x=>x.trim());
+      const opts = parts.slice(1);
+      if(!parts[0] || opts.length<2 || opts.length>4) return { err:`Ogni domanda deve avere da 2 a 4 opzioni: «${l.slice(0,40)}…»` };
+      const right = opts.findIndex(o=>o.startsWith("*"));
+      if(right<0 || opts.filter(o=>o.startsWith("*")).length>1) return { err:`Segna con * una sola risposta corretta: «${l.slice(0,40)}…»` };
+      q.push([parts[0], opts.map(o=>o.replace(/^\*\s*/,"")), right]);
+    }
+    if(q.length<2) return { err:"Inserisci almeno 2 domande." };
+    return { q };
+  }
+  const sections = []; let cur = null;
+  const need = () => { if(!cur){ cur = { h:"Contenuto" }; sections.push(cur); } return cur; };
+  for(const l of lines){
+    if(l.startsWith("##")){ cur = { h:l.replace(/^#+\s*/,"") || "Sezione" }; sections.push(cur); }
+    else if(l.startsWith("- ")) (need().list ||= []).push(l.slice(2));
+    else if(l.startsWith("?")) (need().ex ||= []).push(l.slice(1).trim());
+    else { const c = need(); c.p = c.p ? c.p+" "+l : l; }
+  }
+  const filled = sections.filter(s=>s.p || s.list || s.ex);
+  if(!filled.length || lines.length<3) return { err:"La scheda è troppo breve: aggiungi almeno una sezione con qualche riga di contenuto." };
+  return { sections:filled };
+}
+function readCollabForm(){
+  const g = id => document.getElementById(id);
+  const u = currentUser();
+  const parsed = parseCollab(collab.tipo, g("cTxt").value);
+  return { parsed, res: parsed.err ? null : {
+    id:"c-"+now().toString(36), type:collab.tipo, page:g("cMat").value, title:g("cTit").value.trim(),
+    desc:g("cDesc").value.trim(), lvl:g("cLvl").value.trim() || "Tutte le classi", mins:+g("cMin").value || 15,
+    autore: u ? `${u.nome} ${u.cognome}` : "", autoreEmail: u?.email, coautori: g("cCo").value.split(/[,;\s]+/).filter(emailOk), ...parsed } };
+}
+function renderCollab(){
+  const u = currentUser();
   const ordini = MENU.filter(m=>!m.soon);
-  const pre = genPrefill || { ordine:(PAGES[currentUser()?.ordine] ? currentUser().ordine : "sec1") };
-  content.innerHTML = `<div class="crumbs"><span>Crea con AI</span></div>
-    <h2>Crea con AI</h2>
-    <p class="lead">Descrivi l'argomento: in pochi secondi ottieni una lezione pronta o una verifica, da rivedere, stampare e assegnare.</p>
-    <div class="gen">
-      <div class="gen-form"><form id="genForm" novalidate>
-        <div class="field"><label>Che cosa vuoi creare?</label>
-          <div class="seg"><button type="button" data-tipo="scheda" class="${gen.tipo==="scheda"?"on":""}">Lezione pronta</button><button type="button" data-tipo="quiz" class="${gen.tipo==="quiz"?"on":""}">Verifica (quiz)</button></div></div>
-        <div class="field"><label for="gOrd">Ordine di scuola</label><select id="gOrd">${ordini.map(m=>`<option value="${m.slug}" ${m.slug===pre.ordine?"selected":""}>${m.label}</option>`).join("")}</select></div>
-        <div class="field"><label for="gMat">Materia</label><select id="gMat"></select></div>
-        <div class="field"><label for="gArg">Argomento</label><input id="gArg" placeholder="Es. Le frazioni equivalenti" maxlength="80"><div class="err">Scrivi l'argomento.</div>
-          <div class="sugg">${SUGG.map(s=>`<button type="button" class="chip sm" data-sugg="${esc(s)}">${esc(s)}</button>`).join("")}</div></div>
-        <div class="field"><label for="gLvl">Livello della classe</label><select id="gLvl"><option value="base">Base / da consolidare</option><option value="intermedio" selected>Intermedio</option><option value="avanzato">Avanzato</option></select></div>
-        <button class="btn btn-ai submit" type="submit">${svg(P.spark,"currentColor",18)} Genera</button>
-      </form></div>
-      <div class="gen-out" id="genOut"><div class="placeholder"><div class="ico" style="background:#f1e9fa">${svg(P.spark,"#7a4fae",30)}</div>
-        <h3>Il tuo materiale apparirà qui</h3><p>Prova con uno degli argomenti suggeriti.</p></div></div>
-    </div>`;
-  const ord = document.getElementById("gOrd"), mat = document.getElementById("gMat");
-  const fillMat = () => { mat.innerHTML = leavesOf(PAGES[ord.value]).map(l=>`<option value="${l.slug}" ${genPrefill?.materia===l.slug?"selected":""}>${l.trail.slice(1).map(t=>t.label).join(" › ")}</option>`).join(""); };
+  const pre = collabPrefill || { ordine:(PAGES[u?.ordine] ? u.ordine : "sec1") };
+  const props = u?.proposte || [];
+  const pub = props.filter(p=>p.stato==="approvata").length, rev = props.filter(p=>p.stato!=="approvata").length;
+  const statoPill = s => s==="approvata" ? '<span class="freeb">Approvata · pubblicata</span>' : '<span class="lockb">In revisione</span>';
+  content.innerHTML = `<div class="crumbs"><span>Collabora</span></div>
+    <span class="pill">Programma docenti collaboratori</span>
+    <h2>Crea risorse con noi. Ricevi ${CREDITI_RISORSA} € di crediti per ognuna.</h2>
+    <p class="lead">Sei un docente? Proponi le tue schede, i tuoi quiz e i tuoi giochi didattici. Ogni risorsa approvata dalla redazione viene pubblicata con il tuo nome e ti vale ${CREDITI_RISORSA} € di crediti da usare sulla piattaforma.</p>
+
+    <div class="steps" style="margin-bottom:28px">
+      <div class="step"><h4>Proponi</h4><p>Compila il modulo qui sotto: scegli tipo, materia e scrivi il contenuto. Puoi lavorare anche con altri colleghi.</p></div>
+      <div class="step"><h4>Revisione</h4><p>La redazione controlla correttezza, originalità e adeguatezza alla classe, e può chiederti piccole modifiche.</p></div>
+      <div class="step"><h4>Pubblicazione + ${CREDITI_RISORSA} €</h4><p>La risorsa entra nel catalogo con il tuo nome e i crediti arrivano subito sul tuo account.</p></div>
+    </div>
+
+    ${u ? `<div class="kpis">
+      <div class="kpi"><b>${euro(u.crediti||0)} €</b><span>saldo crediti</span></div>
+      <div class="kpi"><b>${pub}</b><span>risorse pubblicate</span></div>
+      <div class="kpi"><b>${rev}</b><span>in revisione</span></div>
+      <div class="kpi"><b>${euro(props.reduce((a,p)=>a+(p.quota||0),0))} €</b><span>crediti guadagnati</span></div>
+    </div>` : ""}
+
+    <div class="collab">
+      <div class="box"><h3>Proponi una nuova risorsa</h3>
+        <form id="collabForm" novalidate>
+          <div class="field"><label>Tipo di risorsa</label>
+            <div class="seg">${Object.keys(COLLAB_FORMAT).map(t=>`<button type="button" data-ctipo="${t}" class="${collab.tipo===t?"on":""}">${TYPES[t].l}</button>`).join("")}</div></div>
+          <div class="row2">
+            <div class="field"><label for="cOrd">Ordine di scuola</label><select id="cOrd">${ordini.map(m=>`<option value="${m.slug}" ${m.slug===pre.ordine?"selected":""}>${m.label}</option>`).join("")}</select></div>
+            <div class="field"><label for="cMat">Materia</label><select id="cMat"></select></div>
+          </div>
+          <div class="field"><label for="cTit">Titolo</label><input id="cTit" maxlength="80" placeholder="Es. Le parti della pianta"><div class="err">Inserisci un titolo.</div></div>
+          <div class="field"><label for="cDesc">Descrizione breve</label><input id="cDesc" maxlength="140" placeholder="A che cosa serve, in una frase"><div class="err">Inserisci una descrizione.</div></div>
+          <div class="row2">
+            <div class="field"><label for="cLvl">Classe / età</label><input id="cLvl" maxlength="30" placeholder="Es. Classe 3ª"></div>
+            <div class="field"><label for="cMin">Durata (minuti)</label><input id="cMin" type="number" min="5" max="120" value="20"></div>
+          </div>
+          <div class="field"><div class="between"><label for="cTxt">Contenuto</label><button type="button" class="linkbtn" id="cEx">Inserisci un esempio</button></div>
+            <p class="fmt" id="cHelp"></p>
+            <textarea id="cTxt" rows="10"></textarea><div class="err" id="cTxtErr">Inserisci il contenuto.</div></div>
+          <div class="field"><label for="cCo">Coautori (facoltativo)</label><input id="cCo" placeholder="email dei colleghi, separate da virgola">
+            <p class="fmt">Se lavori con altri docenti, i ${CREDITI_RISORSA} € di crediti vengono divisi in parti uguali tra tutti gli autori.</p></div>
+          <div class="field"><label class="check"><input type="checkbox" id="cOrig"> <span>Dichiaro che il contenuto è originale e concedo a Risorse Didattiche la licenza per pubblicarlo.</span></label>
+            <div class="err">Devi confermare per inviare la proposta.</div></div>
+          <div class="form-err" id="collabErr"></div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-primary" type="submit">Invia la proposta</button><button class="btn btn-outline" type="button" id="cPrev">Anteprima</button></div>
+        </form>
+      </div>
+      <div class="collab-side">
+        <div class="box"><h3>I tuoi crediti</h3>
+          <p class="muted" style="margin:0 0 12px;line-height:1.5">1 credito = 1 €. Li usi per pagare gli abbonamenti sulla piattaforma: con una sola risorsa approvata copri un anno di piano Professore Plus.</p>
+          <ul class="perks">${["Scheda, quiz o gioco: stesso compenso","Nessun limite al numero di proposte","Il tuo nome su ogni risorsa pubblicata"].map(t=>`<li>${check("#2f8a6f")}<span>${t}</span></li>`).join("")}</ul>
+        </div>
+        <div class="box"><h3>Le mie proposte</h3>
+          ${!u ? `<p class="muted" style="margin:0 0 14px">Accedi per vedere le tue proposte e il saldo crediti.</p><button class="btn btn-primary btn-sm" data-demologin="#collabora">Entra con l'account demo</button>`
+          : props.length ? props.map(p=>`<div class="prop">
+              <div><a href="#risorsa/${p.res.id}" class="pt">${esc(p.res.title)}</a><div class="prog-l">${TYPES[p.res.type].l} · ${esc(PAGES[p.res.page]?.label||"")} · ${new Date(p.at).toLocaleDateString("it-IT")}</div></div>
+              <div class="pr">${statoPill(p.stato)}${p.stato==="approvata" ? `<b class="cred">+${euro(p.quota)} €</b>` : `<button class="linkbtn" data-approve="${p.id}">Simula approvazione</button>`}</div></div>`).join("")
+          : `<p class="muted" style="margin:0">Non hai ancora inviato proposte.</p>`}
+        </div>
+      </div>
+    </div>
+    <div id="cPreview"></div>
+
+    <section class="sec" style="margin-top:48px">
+      <div class="sec-head"><span class="eyebrow">Domande frequenti</span><h3>Come funziona la collaborazione</h3></div>
+      <div class="faq">
+        <details><summary>Chi può proporre una risorsa?</summary><p>Tutti i docenti registrati, di ogni ordine di scuola. Non serve avere un piano a pagamento.</p></details>
+        <details><summary>Come vengono valutate le proposte?</summary><p>La redazione verifica correttezza dei contenuti, originalità, chiarezza delle consegne e adeguatezza alla classe indicata. Se serve qualche ritocco ti scriviamo prima di pubblicare.</p></details>
+        <details><summary>Che cosa sono i crediti?</summary><p>Ogni risorsa approvata vale ${CREDITI_RISORSA} € di crediti, utilizzabili per pagare gli abbonamenti sulla piattaforma. I crediti non sono convertibili in denaro.</p></details>
+        <details><summary>Posso scrivere una risorsa con altri colleghi?</summary><p>Sì: indica le loro email nel campo Coautori. I crediti vengono divisi in parti uguali e tutti i nomi compaiono sulla risorsa.</p></details>
+      </div>
+    </section>`;
+
+  const ord = document.getElementById("cOrd"), mat = document.getElementById("cMat");
+  const fillMat = () => { mat.innerHTML = leavesOf(PAGES[ord.value]).map(l=>`<option value="${l.slug}" ${collabPrefill?.materia===l.slug?"selected":""}>${l.trail.slice(1).map(t=>t.label).join(" › ")}</option>`).join(""); };
   fillMat(); ord.onchange = fillMat;
-  const form = document.getElementById("genForm");
-  form.addEventListener("click", e=>{
-    const t = e.target.closest("[data-tipo]");
-    if(t){ gen.tipo = t.dataset.tipo; form.querySelectorAll("[data-tipo]").forEach(b=>b.classList.toggle("on", b===t)); }
-    const s = e.target.closest("[data-sugg]");
-    if(s){ const a=document.getElementById("gArg"); a.value = s.dataset.sugg; mark(a,false); }
-  });
-  form.addEventListener("input", e=>{ const f=e.target.closest(".field.bad"); if(f) f.classList.remove("bad"); });
-  form.addEventListener("submit", e=>{
+  const txt = document.getElementById("cTxt");
+  const setTipo = t => { collab.tipo = t; document.querySelectorAll("[data-ctipo]").forEach(b=>b.classList.toggle("on", b.dataset.ctipo===t));
+    document.getElementById("cHelp").textContent = COLLAB_FORMAT[t].help; txt.placeholder = COLLAB_FORMAT[t].example; };
+  setTipo(collab.tipo);
+  const form = document.getElementById("collabForm");
+  form.addEventListener("click", e=>{ const b = e.target.closest("[data-ctipo]"); if(b) setTipo(b.dataset.ctipo); });
+  form.addEventListener("input", e=>{ const f=e.target.closest(".field.bad"); if(f) f.classList.remove("bad"); formError("collabErr",""); });
+  document.getElementById("cEx").onclick = ()=>{ txt.value = COLLAB_FORMAT[collab.tipo].example; mark(txt,false);
+    const t=document.getElementById("cTit"), d=document.getElementById("cDesc");
+    if(!t.value) t.value = {scheda:"Le parti della pianta", quiz:"Ripasso lampo di cultura generale", gioco:"Animali in inglese"}[collab.tipo];
+    if(!d.value) d.value = {scheda:"Scheda illustrata con le funzioni di radice, fusto, foglie e fiore.", quiz:"Domande veloci con spiegazione per ogni risposta.", gioco:"Abbina i nomi degli animali alla traduzione inglese."}[collab.tipo]; };
+  const validate = needOrig => {
+    const t=document.getElementById("cTit"), d=document.getElementById("cDesc"), o=document.getElementById("cOrig");
+    let ok = [mark(t,!t.value.trim()), mark(d,!d.value.trim()), mark(txt,!txt.value.trim())].every(Boolean);
+    if(needOrig) ok = mark(o, !o.checked) && ok;
+    if(!ok) return null;
+    const r = readCollabForm();
+    if(r.parsed.err){ document.getElementById("cTxtErr").textContent = r.parsed.err; mark(txt,true); txt.focus(); return null; }
+    document.getElementById("cTxtErr").textContent = "Inserisci il contenuto.";
+    return r.res;
+  };
+  document.getElementById("cPrev").onclick = ()=>{
+    const r = validate(false); if(!r) return;
+    document.getElementById("cPreview").innerHTML = `<h3 class="sub-sec">Anteprima: come la vedranno colleghi e studenti</h3>${bodyHTML(r)}`;
+    document.getElementById("cPreview").scrollIntoView({behavior:"smooth"});
+  };
+  form.addEventListener("submit", async e=>{
     e.preventDefault();
-    const a = document.getElementById("gArg");
-    if(!mark(a, !a.value.trim())){ a.focus(); return; }
-    runGen({ tipo:gen.tipo, ordine:ord.value, materia:mat.value, arg:a.value.trim(), lvl:document.getElementById("gLvl").value }, e.target.querySelector("[type=submit]"));
+    const r = validate(true); if(!r) return;
+    if(!currentUser()){ openAuth("signup","Registrati gratis per inviare la tua proposta e ricevere i crediti.", ()=>{ location.hash="#collabora"; render(); }); return; }
+    const btn = form.querySelector("[type=submit]");
+    busy(btn, true, "Invio in corso…"); await wait(900); busy(btn, false);
+    const u = currentUser(); r.autore = `${u.nome} ${u.cognome}`; r.autoreEmail = u.email;
+    updateUser(u=>u.proposte.unshift({ id:"p-"+now().toString(36), stato:"revisione", at:now(), res:r }));
+    showToast("Proposta inviata! La redazione la esaminerà a breve");
+    form.reset(); renderCollab(); window.scrollTo({top:0, behavior:"smooth"});
   });
 }
-const STOP = new Set(["della","delle","dello","degli","dell","nella","nelle","negli","nell","sulla","sulle","alla","alle","dalla","dalle","come","sono","cosa","quale","quali","questo","questa"]);
-function matchCatalog(arg, type){
-  const words = norm(arg).split(/[^a-z0-9]+/).filter(w=>w.length>3 && !STOP.has(w)).map(w=>w.slice(0, Math.max(4, w.length-2)));
-  if(!words.length) return [];
-  return R.filter(r=>(!type || r.type===type) && words.some(w=>norm(r.title+" "+r.desc).includes(w)));
-}
-function generate(o){
-  const page = PAGES[o.materia], materia = (page.label === "Altre materie" ? "Scienze" : page.label).toLowerCase();
-  const base = { id:"ai-"+now().toString(36), ai:true, page:o.materia, lvl:{base:"Livello base",intermedio:"Livello intermedio",avanzato:"Livello avanzato"}[o.lvl] };
-  if(o.tipo==="quiz"){
-    const hit = matchCatalog(o.arg, "quiz")[0];
-    if(!hit) return { error:true };
-    return { ...base, type:"quiz", mins:hit.mins, title:`Verifica: ${o.arg}`, desc:`Quiz a scelta multipla sul tema «${o.arg}», con spiegazioni per ogni risposta.`, q:hit.q };
-  }
-  const related = matchCatalog(o.arg).slice(0,3);
-  const sections = [
-    {h:"Obiettivi di apprendimento", list:[`Comprendere i concetti chiave del tema «${o.arg}»`, `Usare il lessico specifico di ${materia}`, `Applicare quanto appreso in un compito concreto`]},
-    {h:"Attivazione · 10 minuti", p:`Domanda stimolo: «Che cosa sapete già sul tema “${o.arg}”? Dove lo avete incontrato fuori da scuola?». Raccogli le risposte alla lavagna in una mappa condivisa.`},
-    {h:"Spiegazione guidata · 15 minuti", ol:["Presenta il tema partendo da un esempio concreto e vicino all'esperienza degli studenti.","Introduci 3–4 parole chiave e chiedi alla classe di inserirle nella mappa iniziale.","Verifica la comprensione con due domande lampo per alzata di mano."]},
-    {h:"Attività in gruppo · 15 minuti", p:`Gruppi da quattro con ruoli (portavoce, scrittore, cronometrista, verificatore). Ogni gruppo prepara uno schema su «${o.arg}» con un esempio originale e lo presenta in un minuto.`},
-    ...(o.lvl==="avanzato" ? [{h:"Approfondimento", p:`Ricerca autonoma: ogni studente trova una fonte attendibile su «${o.arg}» e ne sintetizza il contenuto in cinque righe, citando la provenienza.`}] : []),
-    {h:"Verifica formativa (exit ticket)", ex:[`Spiega con parole tue, in tre righe, il tema «${o.arg}».`, `Fai un esempio concreto collegato a «${o.arg}».`, "Che cosa non ti è ancora chiaro?"]},
-    {h:"Inclusione e BES", list:[o.lvl==="base" ? "Mappa concettuale già compilata con le parole chiave e le definizioni" : "Mappa concettuale con le parole chiave da completare","Consegne spezzate in passaggi brevi e tempi aggiuntivi","Possibilità di rispondere oralmente all'exit ticket"]},
-    ...(related.length ? [{h:"Materiali collegati dal catalogo", links:related.map(r=>({id:r.id, title:r.title}))}] : [])
-  ];
-  return { ...base, type:"scheda", mins:50, title:`Lezione: ${o.arg}`, desc:`Lezione da 50 minuti sul tema «${o.arg}»: obiettivi, attività, verifica e adattamenti per BES.`, sections };
-}
-async function runGen(o, btn){
-  if(gen.busy) return;
-  const out = document.getElementById("genOut");
-  const r = generate(o);
-  if(r.error){
-    out.innerHTML = `<div class="gen-err fade-in"><span class="demo-flag">${svg(P.spark,"currentColor",14)} Versione dimostrativa</span>
-      <h3>In questa demo i quiz si generano sugli argomenti di esempio</h3>
-      <p class="muted">Nel prodotto il modello linguistico crea domande su qualsiasi argomento. Prova uno di questi, oppure genera una <b>lezione pronta</b> su «${esc(o.arg)}».</p>
-      <div class="sugg">${R.filter(x=>x.type==="quiz").slice(0,8).map(x=>`<button type="button" class="chip sm" data-sugg2="${esc(x.title)}">${esc(x.title)}</button>`).join("")}</div></div>`;
-    out.querySelectorAll("[data-sugg2]").forEach(b=>b.onclick=()=>{ document.getElementById("gArg").value=b.dataset.sugg2; document.getElementById("genForm").requestSubmit(); });
-    return;
-  }
-  gen.busy = true; busy(btn, true, "Sto generando…");
-  const steps = ["Analizzo argomento e livello della classe","Strutturo obiettivi e tempi della lezione", r.type==="quiz" ? "Scrivo domande e spiegazioni" : "Scrivo attività, verifica e adattamenti BES"];
-  out.innerHTML = `<span class="demo-flag">${svg(P.spark,"currentColor",14)} Generazione simulata nella demo</span><div class="thinking">${steps.map(s=>`<div><span class="spin"></span>${s}</div>`).join("")}</div><div id="genBody"></div>`;
-  const rows = out.querySelectorAll(".thinking div");
-  for(const row of rows){ await wait(650); if(location.hash!=="#genera") break; row.classList.add("dn"); row.querySelector(".spin").outerHTML = check("var(--ok)"); }
-  const body = document.getElementById("genBody");
-  if(body){
-    const parts = r.type==="quiz" ? r.q.map((q,i)=>qcard(q,i,r.q.length)) : [sheetTop(r), ...r.sections.map(sheetSection), sheetFoot(r)];
-    body.innerHTML = r.type==="quiz" ? `<div class="quiz" data-quiz></div>` : `<div class="sheet"></div>`;
-    const box = body.firstElementChild;
-    for(const p of parts){ if(location.hash!=="#genera") break; const d=document.createElement("div"); d.className="fade-in"; d.innerHTML=p; box.appendChild(d); await wait(320); }
-    if(r.type==="quiz") box.insertAdjacentHTML("beforeend", '<div class="qres"></div>');
-    lastGenerated = r;
-    body.insertAdjacentHTML("beforeend", `<div class="v-actions fade-in" style="margin-top:16px"><button class="btn btn-primary btn-sm" id="genSave">Salva e assegna</button>
-      <button class="btn btn-ghost btn-sm" id="genAgain">Rigenera</button><span class="sp"></span><span class="muted" style="font-size:13px;font-weight:700">Bozza da rivedere prima dell'uso</span></div>`);
-    document.getElementById("genAgain").onclick = ()=>document.getElementById("genForm").requestSubmit();
-    document.getElementById("genSave").onclick = ()=>{
-      const save = ()=>{ updateUser(u=>{ if(!u.mine.some(m=>m.id===r.id)) u.mine.unshift(r); }); location.hash = "#risorsa/"+r.id; showToast("Salvato nei tuoi materiali"); };
-      if(!currentUser()) openAuth("signup","Registrati gratis per salvare e assegnare i materiali creati con l'AI.", save); else save();
-    };
-  }
-  gen.busy = false; if(document.body.contains(btn)) busy(btn, false);
+function approveProposal(pid){
+  let res = null, quota = 0;
+  updateUser(u=>{ const p = u.proposte.find(p=>p.id===pid); if(!p || p.stato==="approvata") return;
+    quota = Math.round(CREDITI_RISORSA / (1 + (p.res.coautori?.length || 0)));
+    p.stato = "approvata"; p.quota = quota; u.crediti = (u.crediti||0) + quota; res = p.res; });
+  if(!res) return;
+  publish(res); refreshAuthUI(); render();
+  showToast(`Risorsa approvata e pubblicata: +${euro(quota)} € di crediti 🎉`);
 }
 
 // ---------- account ----------
@@ -1797,11 +1878,12 @@ function renderAccount(){
           <dt>Scuola</dt><dd>${PAGES[u.ordine] ? esc(PAGES[u.ordine].label) : "Più ordini di scuola"}</dd>
           <dt>Iscritto dal</dt><dd>${fmt(u.creato)}</dd>
           <dt>Newsletter</dt><dd>${u.news ? "Attiva" : "Non attiva"}</dd>
+          <dt>Crediti</dt><dd>${euro(u.crediti||0)} € · <a href="#collabora" style="color:#9a5d0b">guadagnane altri</a></dd>
         </dl>
       </div>
       <div class="box"><h3>Abbonamento</h3>
         ${u.plan ? `<span class="status" style="background:#eaf5f1;color:var(--ok)">● Piano ${esc(u.plan.name)} attivo</span>
-          <p style="color:var(--muted);line-height:1.5;margin:14px 0 0">${euro(u.plan.amt)} €${esc(u.plan.per)} · attivo dal ${fmt(u.plan.since)}. Tutte le risorse Premium, l'AI e le classi sono sbloccate.</p>
+          <p style="color:var(--muted);line-height:1.5;margin:14px 0 0">${euro(u.plan.amt)} €${esc(u.plan.per)} · attivo dal ${fmt(u.plan.since)}. Tutte le risorse Premium e le classi sono sbloccate.</p>
           <div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn btn-outline" href="#prezzi">Cambia piano</a><button class="btn btn-ghost" data-cancelplan>Disattiva (demo)</button></div>`
         : `<span class="status">● Nessun piano attivo</span>
           <p style="color:var(--muted);line-height:1.5;margin:14px 0 0">Attiva un piano per sbloccare le risorse Premium e gli accessi per i tuoi studenti.</p>
@@ -1820,8 +1902,8 @@ const PLANS = [
     { name:"Plus", amt:20, per:"/anno", qty:"10 corsi", perks:["Accesso a tutte le risorse dei corsi scelti"], cta:"Scegli Plus" }
   ]},
   { title:"Professore", sub:"Per i docenti che lavorano con le proprie classi · 1 sola categoria", color:"var(--c-sec1)", tiers:[
-    { name:"Professore", from:true, amt:100, per:"/anno", qty:"6 classi", perks:["1 categoria a scelta","Crea con AI incluso", ...CLASS_PERKS], cta:"Scegli piano" },
-    { name:"Professore Plus", amt:200, per:"/anno", qty:"15 classi", perks:["1 categoria a scelta","Crea con AI incluso", ...CLASS_PERKS], cta:"Scegli piano" }
+    { name:"Professore", from:true, amt:100, per:"/anno", qty:"6 classi", perks:["1 categoria a scelta", ...CLASS_PERKS], cta:"Scegli piano" },
+    { name:"Professore Plus", amt:200, per:"/anno", qty:"15 classi", perks:["1 categoria a scelta", ...CLASS_PERKS], cta:"Scegli piano" }
   ]},
   { title:"Istituti Scolastici", sub:"Per scuole e istituti comprensivi", color:"var(--c-sec2)", tiers:[
     { name:"Istituto", from:true, amt:1000, per:"/anno", qty:"10 classi", perks:["Tutte le categorie","Pannello per il dirigente", ...CLASS_PERKS], cta:"Richiedi un preventivo", alt:true }
@@ -1840,7 +1922,7 @@ function renderPrices(){
     <p class="lead">Dal singolo utente all'intero istituto: abbonamenti annuali semplici, senza sorprese.</p>
     <div class="note">
       ${svg(P.shield,"#2f8a6f",22,2.2)}
-      <p><strong>Ogni classe include 25 accessi gratuiti per gli studenti</strong> e la raccolta dati protetta.</p>
+      <p><strong>Ogni classe include 25 accessi gratuiti per gli studenti</strong> e la raccolta dati protetta.${currentUser()?.crediti ? ` Hai <strong>${euro(currentUser().crediti)} € di crediti</strong>: li usi al momento del pagamento.` : ` Sei un docente? <a href="#collabora" style="color:inherit;font-weight:800">Pubblica una risorsa e ricevi ${CREDITI_RISORSA} € di crediti.</a>`}</p>
     </div>
     ${PLANS.map(p=>`
       <section class="aud">
@@ -1879,159 +1961,49 @@ function openCheckout(name){
     <span class="pill">Checkout</span><h4>Piano ${esc(t.name)}</h4>
     <div class="sum"><span>${esc(t.qty)} · rinnovo annuale</span><b>${euro(t.amt)} €</b></div>
     <form id="payForm" novalidate>
-      <div class="pay-methods">
-        <label><input type="radio" name="pm" checked> Carta di pagamento</label>
-        <label class="off"><input type="radio" name="pm" disabled> <span>Carta del docente<small>in arrivo</small></span></label>
+      ${u.crediti ? `<label class="check" style="color:var(--ink);font-weight:800"><input type="checkbox" id="pUseCr" checked> Usa i miei crediti collaboratore (saldo ${euro(u.crediti)} €)</label>
+        <div id="crBox"></div>` : ""}
+      <div id="cardFields" style="display:flex;flex-direction:column;gap:14px">
+        <div class="pay-methods">
+          <label><input type="radio" name="pm" checked> Carta di pagamento</label>
+          <label class="off"><input type="radio" name="pm" disabled> <span>Carta del docente<small>in arrivo</small></span></label>
+        </div>
+        ${field("pName","Intestatario", u.nome+" "+u.cognome)}
+        ${field("pCard","Numero carta","4242 4242 4242 4242","","inputmode=numeric autocomplete=off")}
+        <div class="row2">${field("pExp","Scadenza","12/29","MM/AA")}${field("pCvc","CVC","123","","inputmode=numeric")}</div>
       </div>
-      ${field("pName","Intestatario", u.nome+" "+u.cognome)}
-      ${field("pCard","Numero carta","4242 4242 4242 4242","","inputmode=numeric autocomplete=off")}
-      <div class="row2">${field("pExp","Scadenza","12/29","MM/AA")}${field("pCvc","CVC","123","","inputmode=numeric")}</div>
-      <button class="btn btn-primary submit" type="submit">Paga ${euro(t.amt)} € e attiva</button>
+      <button class="btn btn-primary submit" type="submit" id="paySubmit">Paga ${euro(t.amt)} € e attiva</button>
       <p class="demo-hint">Pagamento simulato: nessun addebito reale.</p>
     </form>`;
   payOverlay.classList.add("show"); payOverlay.setAttribute("aria-hidden","false");
   const form = document.getElementById("payForm");
+  const credUsed = () => (!t.alt && document.getElementById("pUseCr")?.checked) ? Math.min(u.crediti, t.amt) : 0;
+  const updCr = () => {
+    if(t.alt) return;
+    const c = credUsed(), due = t.amt - c, box = document.getElementById("crBox");
+    if(box) box.innerHTML = c ? `<div class="credit-row"><span>Crediti utilizzati</span><span>− ${euro(c)} €</span></div><div class="credit-row tot"><span>Da pagare</span><span>${euro(due)} €</span></div>` : "";
+    document.getElementById("cardFields").style.display = due ? "flex" : "none";
+    document.getElementById("paySubmit").textContent = due ? `Paga ${euro(due)} € e attiva` : "Attiva con i crediti";
+  };
+  updCr();
+  form.addEventListener("change", e=>{ if(e.target.id==="pUseCr") updCr(); });
   form.addEventListener("input", e=>{ const f=e.target.closest(".field.bad"); if(f) f.classList.remove("bad"); });
   form.addEventListener("submit", async e=>{
     e.preventDefault();
-    const ok = [...form.querySelectorAll(".field input")].map(i=>mark(i, !i.value.trim())).every(Boolean);
+    const ok = [...form.querySelectorAll(".field input")].filter(i=>i.offsetParent!==null).map(i=>mark(i, !i.value.trim())).every(Boolean);
     if(!ok) return;
     const btn = form.querySelector("[type=submit]");
     busy(btn, true, t.alt ? "Invio in corso…" : "Pagamento in corso…");
     await wait(1200);
     busy(btn, false); closePay();
     if(t.alt){ showToast("Richiesta ricevuta: ti ricontatteremo a breve (simulazione)"); return; }
-    updateUser(u=>u.plan = { name:t.name, amt:t.amt, per:t.per, since:new Date().toISOString() });
+    const used = credUsed();
+    updateUser(u=>{ u.plan = { name:t.name, amt:t.amt, per:t.per, since:new Date().toISOString() }; u.crediti -= used; });
     refreshAuthUI();
-    showToast(`Piano ${t.name} attivato: risorse Premium, AI e classi sbloccate 🎉`);
+    showToast(`Piano ${t.name} attivato${used ? ` (${euro(used)} € pagati con i crediti)` : ""}: risorse Premium e classi sbloccate 🎉`);
     if(returnTo){ const to=returnTo; returnTo=null; location.hash = to; } else render();
   });
   setTimeout(()=>form.querySelector("input:not([type=radio])")?.focus(), 60);
-}
-
-// ---------- investitori ----------
-const CALC = [
-  { id:"doc", label:"Docenti con piano a pagamento", min:0, max:30000, step:250, val:3000, fmt:v=>euro(v), hint:"" },
-  { id:"arpu", label:"Spesa media annua per docente", min:20, max:200, step:5, val:110, fmt:v=>v+" €", hint:"Listino: 100–200 € per i piani Professore, 5–20 € per i singoli." },
-  { id:"ist", label:"Istituti con contratto", min:0, max:800, step:5, val:40, fmt:v=>euro(v), hint:"" },
-  { id:"tick", label:"Contratto medio per istituto", min:1000, max:6000, step:100, val:1800, fmt:v=>euro(v)+" €", hint:"Listino: da 1.000 € per 10 classi." },
-  { id:"ent", label:"Enti e doposcuola", min:0, max:500, step:5, val:25, fmt:v=>euro(v), hint:"A partire da 500 € ciascuno; nello scenario 800 €." }
-];
-const DOCENTI_IT = 900000;
-function renderInvestors(){
-  const yes='<span class="mk-y">✓</span>', no='<span class="mk-n">✗</span>', part='<span class="mk-p">~</span>';
-  content.innerHTML = `
-    <section class="inv-hero">
-      <span class="pill">Per investitori</span>
-      <h2>Il posto unico dove i docenti italiani trovano, creano e assegnano i materiali didattici.</h2>
-      <p class="lead">Catalogo curato per ordine di scuola e materia, generazione con AI e classi con dati in tempo reale. Un prodotto che entra dal singolo docente a 5 € e cresce fino al contratto d'istituto.</p>
-      <div class="hero-ctas"><button class="btn btn-primary btn-lg" data-demologin="#classi">Prova il prodotto (account demo)</button><button class="btn btn-outline btn-lg" data-contact>Fissa un incontro</button></div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Il problema</span><h3>Preparare le lezioni è un secondo lavoro</h3></div>
-      <div class="grid3">
-        <div class="pcard"><span class="fi" style="background:#fbe7e1">${svg(P.search,"#d9694a")}</span><h4>Ore perse a cercare</h4><p>I docenti preparano i materiali la sera e nel weekend, saltando tra siti, gruppi social e PDF di qualità variabile.</p></div>
-        <div class="pcard"><span class="fi" style="background:#fdf0dc">${svg(P.chart,"#c97a14")}</span><h4>Nessun dato dalla classe</h4><p>Una scheda fotocopiata non dice chi l'ha completata, chi l'ha capita e chi è rimasto indietro.</p></div>
-        <div class="pcard"><span class="fi" style="background:#e9f0fa">${svg(P.shield,"#4f7fb8")}</span><h4>Privacy dei minori</h4><p>Strumenti generici, non pensati per la scuola, espongono istituti e famiglie a rischi sul trattamento dei dati.</p></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">La soluzione</span><h3>Quattro funzioni, un unico flusso</h3><p>Ogni scheda qui sotto apre la funzione vera della demo.</p></div>
-      <div class="grid4">
-        <a class="pcard" href="#sec1-matematica"><span class="fi" style="background:#e6f3ee">${svg(P.book,"#3f9a80")}</span><h4>Catalogo curato</h4><p>${R.length} materiali di esempio su ${LEAVES} materie, dall'infanzia alle superiori.</p><span class="go">Apri il catalogo →</span></a>
-        <a class="pcard" href="#genera"><span class="fi" style="background:#f1e9fa">${svg(P.spark,"#7a4fae")}</span><h4>Crea con AI</h4><p>Una lezione completa da 50 minuti a partire da un argomento, con verifica e adattamenti BES.</p><span class="go">Prova il generatore →</span></a>
-        <a class="pcard" href="#risorsa/frazioni-equivalenti"><span class="fi" style="background:#fdf0dc">${svg(P.cap,"#c97a14")}</span><h4>Quiz e giochi</h4><p>Interattivi, con correzione immediata: funzionano su LIM, tablet e smartphone.</p><span class="go">Fai un quiz →</span></a>
-        <button class="pcard" data-demologin="#classi" style="text-align:left;cursor:pointer;font:inherit"><span class="fi" style="background:#e9f0fa">${svg(P.users,"#4f7fb8")}</span><h4>Classi in tempo reale</h4><p>Assegni, gli studenti completano, il docente vede progressi e punteggi.</p><span class="go">Apri il pannello →</span></button>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Il mercato</span><h3>Una scuola, ogni giorno, in tutta Italia</h3></div>
-      <div class="grid3">
-        <div class="pcard"><span class="n">~900 mila</span><h4>Docenti</h4><p>Il nostro utente principale: decide i materiali e porta lo strumento in classe.</p></div>
-        <div class="pcard"><span class="n">~8.000</span><h4>Istituzioni scolastiche statali</h4><p>Clienti per i contratti d'istituto, con budget dedicati alla didattica digitale.</p></div>
-        <div class="pcard"><span class="n">~7 milioni</span><h4>Studenti</h4><p>Utenti finali inclusi nei piani (25 accessi per classe): nessun costo per le famiglie.</p></div>
-      </div>
-      <p class="src">Ordini di grandezza basati sui dati pubblici del Ministero dell'Istruzione e del Merito. Verificare i valori aggiornati prima della presentazione.</p>
-      <div class="callout">${svg(P.euro,"#2f8a6f",22,2.2)}<p><strong>Un budget già stanziato.</strong> Con la Carta del docente gli insegnanti di ruolo ricevono ogni anno un importo dedicato a formazione e strumenti per la didattica. L'accreditamento come esercente è nella roadmap e trasformerebbe il piano Professore in una spesa a costo zero per il docente.</p></div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Modello di business</span><h3>Abbonamenti annuali, dal docente all'istituto</h3>
-        <p>Ingresso a basso attrito (5 €), upgrade al piano Professore, poi il contratto d'istituto: il docente porta il prodotto nella scuola, la scuola lo estende a tutte le classi.</p></div>
-      <div class="auds">${audCards()}</div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Scenario di ricavi</span><h3>Calcola il fatturato ricorrente annuo</h3><p>Muovi i cursori: i valori sono ipotesi di lavoro, non dati consuntivi.</p></div>
-      <div class="calc">
-        <div>${CALC.map(c=>`<div class="slider"><div class="between"><label for="k-${c.id}">${c.label}</label><b id="kv-${c.id}">${c.fmt(c.val)}</b></div>
-          <input type="range" id="k-${c.id}" data-calc min="${c.min}" max="${c.max}" step="${c.step}" value="${c.val}">${c.hint?`<small>${c.hint}</small>`:""}</div>`).join("")}</div>
-        <div class="arr"><span class="lbl">Ricavi ricorrenti annui (ARR)</span><span class="big" id="arrTot"></span>
-          <div class="arr-row"><span>Docenti</span><b id="arrDoc"></b></div>
-          <div class="arr-row"><span>Istituti</span><b id="arrIst"></b></div>
-          <div class="arr-row"><span>Enti e doposcuola</span><b id="arrEnt"></b></div>
-          <div class="arr-row"><span>Penetrazione sui docenti</span><b id="arrPen"></b></div>
-          <div class="arr-row"><span>Penetrazione sugli istituti</span><b id="arrPenI"></b></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Posizionamento</span><h3>Perché non basta ciò che esiste già</h3></div>
-      <div class="tbl-wrap"><table class="cmp">
-        <thead><tr><th></th><th class="us">Risorse Didattiche</th><th>Siti di schede gratuite</th><th>Piattaforme degli editori</th><th>Chatbot AI generici</th></tr></thead>
-        <tbody>
-          <tr><td>Catalogo italiano per ordine e materia</td><td class="us">${yes}</td><td>${part}</td><td>${yes}</td><td>${no}</td></tr>
-          <tr><td>Materiali su misura generati con AI</td><td class="us">${yes}</td><td>${no}</td><td>${part}</td><td>${yes}</td></tr>
-          <tr><td>Classi, accessi studenti e progressi</td><td class="us">${yes}</td><td>${no}</td><td>${yes}</td><td>${no}</td></tr>
-          <tr><td>Pensato per i dati dei minori</td><td class="us">${yes}</td><td>${part}</td><td>${yes}</td><td>${no}</td></tr>
-          <tr><td>Indipendente dal libro di testo adottato</td><td class="us">${yes}</td><td>${yes}</td><td>${no}</td><td>${yes}</td></tr>
-        </tbody></table></div>
-      <p class="src">✓ sì · ~ in parte o dipende dal servizio · ✗ no. Confronto per categorie di prodotto.</p>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Roadmap</span><h3>Dove andiamo</h3></div>
-      <div class="grid4">
-        <div class="phase now"><span class="ph">Fase 1 · ora</span><h4>Lancio</h4><ul><li>Catalogo per infanzia, primaria e secondaria</li><li>Piani individuali e Professore</li><li>Classi con 25 accessi studenti</li></ul></div>
-        <div class="phase"><span class="ph">Fase 2</span><h4>AI in produzione</h4><ul><li>Generazione su qualsiasi argomento con revisione del docente</li><li>Allineamento alle Indicazioni nazionali</li><li>Esportazione in PDF e Word</li></ul></div>
-        <div class="phase"><span class="ph">Fase 3</span><h4>Canale scuole</h4><ul><li>Accreditamento Carta del docente</li><li>Contratti d'istituto e acquisti tramite MePA</li><li>Integrazione con Google Classroom</li></ul></div>
-        <div class="phase"><span class="ph">Fase 4</span><h4>Scala</h4><ul><li>Licei e altri istituti</li><li>Marketplace di docenti autori con ricavi condivisi</li><li>Analisi per i dirigenti scolastici</li></ul></div>
-      </div>
-    </section>
-
-    <section class="sec">
-      <div class="sec-head"><span class="eyebrow">Tour della demo</span><h3>Il prodotto in cinque clic</h3><p>Il percorso consigliato per una presentazione dal vivo.</p></div>
-      <div class="tour">
-        <button data-demologin="#home"><b>Entra come docente</b><span>Account demo con piano Professore e tre classi.</span></button>
-        <a href="#risorsa/frazioni-equivalenti"><b>Fai un quiz</b><span>Correzione immediata e spiegazioni.</span></a>
-        <a href="#genera"><b>Genera una lezione</b><span>Dall'argomento alla scheda stampabile.</span></a>
-        <a href="#classi"><b>Assegna e osserva</b><span>Progressi degli studenti in tempo reale.</span></a>
-        <a href="#prezzi"><b>Flusso d'acquisto</b><span>Paywall, checkout e sblocco dei contenuti.</span></a>
-      </div>
-    </section>
-
-    <div class="band">
-      <div><h3>Parliamone.</h3><p>Ti mostriamo il prodotto dal vivo, i numeri e il piano di crescita.</p></div>
-      <div class="btns"><button class="btn btn-primary btn-lg" data-contact>Fissa un incontro</button><button class="btn btn-outline btn-lg" data-demologin="#classi">Apri la demo</button></div>
-    </div>`;
-  const upd = ()=>{
-    const v = Object.fromEntries(CALC.map(c=>[c.id, +document.getElementById("k-"+c.id).value]));
-    CALC.forEach(c=>document.getElementById("kv-"+c.id).textContent = c.fmt(v[c.id]));
-    const d = v.doc*v.arpu, i = v.ist*v.tick, en = v.ent*800, tot = d+i+en;
-    const k = n => n>=1e6 ? (n/1e6).toLocaleString("it-IT",{maximumFractionDigits:2})+" M€" : euro(Math.round(n))+" €";
-    document.getElementById("arrTot").textContent = k(tot);
-    document.getElementById("arrDoc").textContent = k(d);
-    document.getElementById("arrIst").textContent = k(i);
-    document.getElementById("arrEnt").textContent = k(en);
-    document.getElementById("arrPen").textContent = (v.doc/DOCENTI_IT*100).toLocaleString("it-IT",{maximumFractionDigits:2})+"%";
-    document.getElementById("arrPenI").textContent = (v.ist/8000*100).toLocaleString("it-IT",{maximumFractionDigits:1})+"%";
-  };
-  content.querySelectorAll("[data-calc]").forEach(i=>i.addEventListener("input", upd));
-  upd();
 }
 
 // ======================================================================
@@ -2040,17 +2012,17 @@ function renderInvestors(){
 let lastSlug = null;
 function render(){
   const slug = decodeURIComponent((location.hash || "#home").slice(1));
-  if(slug!==lastSlug){ resFilter = "tutti"; if(!PAGES[slug] && slug!=="genera") genPrefill = null; }
+  if(slug!==lastSlug){ resFilter = "tutti"; if(slug!=="collabora") collabPrefill = null; }
   const changed = slug!==lastSlug; lastSlug = slug;
   const rid = slug.startsWith("risorsa/") ? slug.slice(8) : null;
   const res = rid ? getRes(rid) : null;
   const page = PAGES[slug] || (res && PAGES[res.page]);
   closeMenus();
-  content.classList.toggle("wide", ["home","investitori","genera","classi"].includes(slug) || (!page && !rid && !["prezzi","account"].includes(slug)));
+  content.classList.toggle("wide", ["home","collabora","classi"].includes(slug) || (!page && !rid && !["prezzi","account"].includes(slug)));
   const activeHref = "#" + (res ? res.page : slug);
   document.querySelectorAll(".link").forEach(a=>a.classList.toggle("active", a.getAttribute("href")===activeHref));
   if(page) page.trail.forEach(t=>{ const g=nav.querySelector(`.grp[data-slug="${t.slug}"]`); if(g) g.classList.add("open"); });
-  const titles = { prezzi:"Prezzi", account:"Il mio account", classi:"Le mie classi", genera:"Crea con AI", investitori:"Per investitori" };
+  const titles = { prezzi:"Prezzi", account:"Il mio account", classi:"Le mie classi", collabora:"Collabora" };
   const tt = res ? res.title : titles[slug] || PAGES[slug]?.label;
   document.title = tt ? `${tt} · Risorse Didattiche` : "Risorse Didattiche";
 
@@ -2058,8 +2030,7 @@ function render(){
   else if(slug==="prezzi") renderPrices();
   else if(slug==="account") renderAccount();
   else if(slug==="classi") renderClasses();
-  else if(slug==="genera") renderGen();
-  else if(slug==="investitori") renderInvestors();
+  else if(slug==="collabora") renderCollab();
   else if(PAGES[slug]) renderSection(PAGES[slug]);
   else renderHome();
   if(changed) window.scrollTo(0,0);
