@@ -19,12 +19,12 @@
     --ok:#2f8a6f; --err:#c4472f;
   }
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%}
+  html,body{margin:0}
   body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
   button{font:inherit}
 
   /* ---------- Sidebar ---------- */
-  aside{width:300px;flex-shrink:0;background:var(--side);color:var(--side-ink);height:100vh;position:sticky;top:0;display:flex;flex-direction:column}
+  aside{width:300px;flex-shrink:0;background:var(--side);color:var(--side-ink);height:100vh;height:100dvh;position:sticky;top:0;align-self:flex-start;display:flex;flex-direction:column}
   .brand{display:flex;align-items:center;gap:12px;padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.08);text-decoration:none;color:inherit}
   .logo{width:40px;height:40px;border-radius:12px;background:var(--accent);display:grid;place-items:center;flex-shrink:0}
   .brand h1{font-family:"Montserrat",sans-serif;font-size:19px;margin:0;line-height:1.15}
